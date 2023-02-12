@@ -1,7 +1,7 @@
 # ITech-Group
 Group Project for ITech
 
-** First task **
+**First task**
 1. overview - praharsh
 2. list of requirements - vikram
 3. system architecture - praharsh
