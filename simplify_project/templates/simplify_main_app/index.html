@@ -1,0 +1,21 @@
+{% extends 'simplify_main_app/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Home
+{% endblock %}
+
+{% block body_block %}
+<div>
+    <h2>Introduction</h2>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+        autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
+        perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!</p>
+    <img src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
+</div>
+<div>
+    <h2>Courses</h2>
+</div>
+
+{% endblock %}
