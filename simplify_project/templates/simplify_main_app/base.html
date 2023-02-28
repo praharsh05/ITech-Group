@@ -3,37 +3,50 @@
 
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-        <meta name="description" content="">
-        <title>
-            Simplify 
-            {% block title_block %}
-                description
-            {% endblock %}
-        </title>
-    </head>
-    <body>
-        <header>
-            <nav>
-                
-                <a href="{% url 'simplify_main_app:index' %}"><img src="{% static 'images/logo.jpg' %}" alt="logo of simplify"> </a>
-                <ul>
-                    <li><a href="{% url 'simplify_main_app:index' %}">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Courses</a></li>
-                    <li><a href="#">Signup/Login</a></li>
-                </ul>
-            </nav>
-        </header>
-        <div>
-            {% block body_block %}
-            {% endblock %}
-        </div>
-        <footer>
-            <p><a href="#">back to top</a></p>
-            <p>&copy; 2023 Simplify</p>
-        </footer>
-    </body>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="description" content="">
+    <title>
+        Simplify
+        {% block title_block %}
+        description
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+    <header>
+        <nav>
+
+            <a href="{% url 'simplify_main_app:index' %}"><img src="{% static 'images/logo.jpg' %}"
+                    alt="logo of simplify"> </a>
+            <ul>
+                <li><a href="{% url 'simplify_main_app:index' %}">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Signup/Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        {% block body_block %}
+        {% endblock %}
+    </div>
+    <footer>
+        <img src="{% static 'images/logo.jpg' %}" alt="logo of simplify">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia natus suscipit ad provident praesentium
+            earum excepturi nihil eligendi voluptatibus dolore.</p>
+        <ul>
+            <li><a href="{% url 'simplify_main_app:index' %}">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Signup/Login</a></li>
+        </ul>
+        <p><a href="#">back to top</a></p>
+        <p>&copy; 2023 Simplify</p>
+    </footer>
+</body>
+
 </html>
