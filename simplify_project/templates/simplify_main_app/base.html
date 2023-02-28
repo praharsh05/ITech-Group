@@ -17,7 +17,14 @@
     <body>
         <header>
             <nav>
-                <a href="{% url 'simplify_main_app:index' %}">Simplify</a>
+                
+                <a href="{% url 'simplify_main_app:index' %}"><img src="{% static 'images/logo.jpg' %}" alt="logo of simplify"> </a>
+                <ul>
+                    <li><a href="{% url 'simplify_main_app:index' %}">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Signup/Login</a></li>
+                </ul>
             </nav>
         </header>
         <div>
@@ -25,6 +32,7 @@
             {% endblock %}
         </div>
         <footer>
+            <p><a href="#">back to top</a></p>
             <p>&copy; 2023 Simplify</p>
         </footer>
     </body>
