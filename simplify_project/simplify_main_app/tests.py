@@ -1,10 +1,9 @@
 from django.test import TestCase, Client
 import os
 import importlib
-from django.urls import reverse, resolve
+from django.urls import reverse
 from django.conf import settings
-import re
-import inspect
+
 
 # Create your tests here.
 
