@@ -7,15 +7,36 @@ Home
 
 {% block body_block %}
 <div>
+    <!-- first div containing intro and login -->
     <h2>Introduction</h2>
 
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
         autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
         perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!</p>
     <img src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
+    <!-- Login form -->
+    <form id="login_form" method="post" action="#"> 
+        {% csrf_token %}
+        Username: <input type="text" name="username" value="" size="50" />
+        Password: <input type="password" name="password" value="" size="50" />
+        <br />
+        <input type="submit" value="submit" />
+    </form>
+    <button id="signup"><a href="#"></a>Signup</button>
 </div>
 <div>
+    <!-- second div giving preview of available courses -->
     <h2>Courses</h2>
+    <div>
+        <ul>
+            <li><a href="#">Course 1</a></li>
+            <li><a href="#">Course 2</a></li>
+            <li><a href="#">Course 3</a></li>
+            <li><a href="#">Course 4</a></li>
+            <li><a href="#">Course 5</a></li>
+            <li><a href="#">Course 6</a></li>
+        </ul>
+    </div>
 </div>
 
 {% endblock %}
