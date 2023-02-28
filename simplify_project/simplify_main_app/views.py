@@ -3,4 +3,6 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Simplify Home page!")
+    context_dict = {}
+    response = render(request, 'simplify_main_app/index.html', context=context_dict)
+    return response
