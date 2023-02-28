@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+        <meta name="description" content="">
+        <title>
+            Simplify 
+            {% block title_block %}
+                description
+            {% endblock %}
+        </title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="{% url 'simplify_main_app:index' %}">Simplify</a>
+            </nav>
+        </header>
+        <div>
+            {% block body_block %}
+            {% endblock %}
+        </div>
+        <footer>
+            <p>&copy; 2023 Simplify</p>
+        </footer>
+    </body>
+</html>
