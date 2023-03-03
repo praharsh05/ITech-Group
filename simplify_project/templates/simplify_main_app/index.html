@@ -8,6 +8,9 @@ Home
 {% block body_block %}
 <div>
     <!-- first div containing intro and login -->
+    {% if user.is_authenticated %}
+    Welcome {{ user.first_name }}!
+    {% endif %}
     <h2>Introduction</h2>
 
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
@@ -15,14 +18,14 @@ Home
         perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!</p>
     <img src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
     <!-- Login form -->
-    <form id="login_form" method="post" action="#"> 
+    <form id="login_form" method="post" action="{% url 'simplify_main_app:login' %}">
         {% csrf_token %}
         Username: <input type="text" name="username" value="" size="50" />
         Password: <input type="password" name="password" value="" size="50" />
         <br />
         <input type="submit" value="submit" />
     </form>
-    <button id="signup"><a href="#"></a>Signup</button>
+    <button id="signup" onclick="window.location= '{% url 'simplify_main_app:register' %}'">Signup</button>
 </div>
 <div>
     <!-- second div giving preview of available courses -->
