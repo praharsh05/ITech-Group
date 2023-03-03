@@ -27,7 +27,13 @@
                 <li><a href="{% url 'simplify_main_app:index' %}">Home</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Courses</a></li>
-                <li><a href="{% url 'simplify_main_app:register' %}">Signup/Login</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'simplify_main_app:dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'simplify_main_app:logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'simplify_main_app:register' %}">Signup</a></li>
+                <li><a href="{% url 'simplify_main_app:login' %}">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
@@ -43,7 +49,8 @@
             <li><a href="{% url 'simplify_main_app:index' %}">Home</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="#">Courses</a></li>
-            <li><a href="{% url 'simplify_main_app:register' %}">Signup/Login</a></li>
+            <li><a href="{% url 'simplify_main_app:register' %}">Signup</a></li>
+            <li><a href="{% url 'simplify_main_app:login' %}">Login</a></li>
         </ul>
         <p><a href="#">back to top</a></p>
         <p>&copy; 2023 Simplify</p>
