@@ -11,8 +11,6 @@ class UserProfile(models.Model):
     typeChoice = [(std, 'Student'),
                   (tut, 'Tutor')]
     user = models.OneToOneField(User , on_delete=models.CASCADE)
-    firstName = models.CharField(max_length=128, blank=False)
-    lastName = models.CharField(max_length=128, blank= False)
     type = models.CharField(max_length=3, choices=typeChoice, default=std, blank=False)
 
     def __str__(self):
