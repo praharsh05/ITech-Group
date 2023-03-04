@@ -1,0 +1,32 @@
+.navbar{
+    background-color: #955fe1;
+}
+.navbar-brand-logo{
+    max-width: 30%;
+}
+.navbar-brand{
+    max-width: 30%;
+    margin: 0;
+    padding: 1rem 1rem;
+}
+.footer-container{
+    display: grid;
+}
+.footer-above{
+    padding: 1rem 0 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+}
+.footer-below{
+    padding: 0 5rem;
+    display: grid;
+}
+.footer-img{
+    max-width: 60%;
+}
+.top-link{
+    text-align: right;
+}
+.copyright{
+    text-align: center;
+}
