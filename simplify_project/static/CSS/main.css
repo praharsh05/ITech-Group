@@ -1,32 +1,40 @@
-.navbar{
+.navbar{/*setting the background color*/
     background-color: #955fe1;
 }
+/* decreasing the navbar logo */
 .navbar-brand-logo{
     max-width: 30%;
 }
+/* trying to wrap the logo in the a tag*/
 .navbar-brand{
     max-width: 30%;
     margin: 0;
-    padding: 1rem 1rem;
+    /* padding: 1rem 1rem; */
 }
+/* for positioning of the footer elements */
 .footer-container{
     display: grid;
 }
+/* for the three divs in the footer containg image, description and links */
 .footer-above{
     padding: 1rem 0 0 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
 }
+/* for the copyright and the back to top link */
 .footer-below{
     padding: 0 5rem;
     display: grid;
 }
+/* reducing the image in the footer */
 .footer-img{
     max-width: 60%;
 }
+/* alignment of the top link */
 .top-link{
     text-align: right;
 }
+/* alignment of the copyright */
 .copyright{
     text-align: center;
 }
