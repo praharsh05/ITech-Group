@@ -6,6 +6,7 @@ from django.dispatch import receiver
 # Create your models here.
 
 #creating a databse for users
+
 class User(AbstractUser):
     class Role(models.TextField):
         STUDENT = 'STD'

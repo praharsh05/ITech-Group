@@ -6,26 +6,33 @@ Home
 {% endblock %}
 
 {% block body_block %}
-<div>
+<div class="intro">
     <!-- first div containing intro and login -->
     {% if user.is_authenticated %}
     Welcome {{ user.first_name }}!
     {% endif %}
-    <h2>Introduction</h2>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-        autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
-        perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!</p>
-    <img src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
-    <!-- Login form -->
-    <form id="login_form" method="post" action="{% url 'simplify_main_app:login' %}">
-        {% csrf_token %}
-        Username: <input type="text" name="username" value="" size="50" />
-        Password: <input type="password" name="password" value="" size="50" />
-        <br />
-        <input type="submit" value="submit" />
-    </form>
-    <button id="signup" onclick="window.location= '{% url 'simplify_main_app:register' %}'">Signup</button>
+    <h2 class="h2">Introduction</h2>
+    <div class="home-grid">
+        <img class="home-img" src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
+        <p class="intro-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in,
+            voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
+            perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!</p>
+        <div class="home-login-signup">
+            <p class="home-heading">Login/Signup</p>
+            <!-- Login form -->
+            <form id="login_form" method="post" action="{% url 'simplify_main_app:login' %}">
+                {% csrf_token %}
+                <input class="home-input" type="text" name="username" value="" size="50" placeholder="username" />
+                <br/>
+                <input class="home-input" type="password" name="password" value="" size="50" placeholder="password"/>
+                <br />
+                <input type="submit" value="submit" />
+            </form>
+            <button id="signup" onclick="window.location= '{% url 'simplify_main_app:register' %}'">Signup</button>
+            <br />
+        </div>
+    </div>
 </div>
 <div>
     <!-- second div giving preview of available courses -->

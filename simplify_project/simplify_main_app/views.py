@@ -68,8 +68,13 @@ def user_login(request):
 
 #dashboard view
 @login_required
-def dashboard(request):
-    return HttpResponse("Your Dashboard")
+def student_dashboard(request):
+    return HttpResponse("Student Dashboard")
+
+#dashboard view
+@login_required
+def tutor_dashboard(request):
+    return HttpResponse("Tutor Dashboard")
 
 
 #logout view
