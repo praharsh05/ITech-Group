@@ -1,6 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
-from simplify_main_app.models import UserProfile
+from simplify_main_app.models import User
 
 
 #creating a user form to get details
@@ -9,14 +8,6 @@ class UserForm(forms.ModelForm):
 
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
-
     class Meta:
         model = User
-        fields = ('username', 'email', 'password','first_name', 'last_name', )
-
-#creating another form to get the type
-class UserProfileForm(forms.ModelForm):
-
-    class Meta:
-        model = UserProfile
-        fields = ('type',)
+        fields = ('username', 'password','first_name', 'last_name','role')
