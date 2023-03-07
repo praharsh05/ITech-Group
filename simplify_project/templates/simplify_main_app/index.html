@@ -11,35 +11,83 @@ Home
     {% if user.is_authenticated %}
     Welcome {{ user.first_name }}!
     {% endif %}
-    <h2>Introduction</h2>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-        autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
-        perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!</p>
-    <img src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
+    <h2 class="text-center mt-5 mb-5 title-text">Introduction</h2>
+    <div class="row mb-5">
+        <div class="col-4 px-3">
+            <img class="d-block w-100" src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
+        </div>
+        <p class="main-text col-5 px-3">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
+            perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!
+        </p>
+    
     <!-- Login form -->
-    <form id="login_form" method="post" action="{% url 'simplify_main_app:login' %}">
-        {% csrf_token %}
-        Username: <input type="text" name="username" value="" size="50" />
-        Password: <input type="password" name="password" value="" size="50" />
-        <br />
-        <input type="submit" value="submit" />
-    </form>
-    <button id="signup" onclick="window.location= '{% url 'simplify_main_app:register' %}'">Signup</button>
-</div>
-<div>
-    <!-- second div giving preview of available courses -->
-    <h2>Courses</h2>
-    <div>
-        <ul>
-            <li><a href="#">Course 1</a></li>
-            <li><a href="#">Course 2</a></li>
-            <li><a href="#">Course 3</a></li>
-            <li><a href="#">Course 4</a></li>
-            <li><a href="#">Course 5</a></li>
-            <li><a href="#">Course 6</a></li>
-        </ul>
+        <div class="col-3 px-3">
+            <h3 class="title-text">Login/Sign up</h3>
+            <form class="main-text" id="login_form" method="post" action="{% url 'simplify_main_app:login' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="inputUsername" class="form-label">Username</label>
+                    <input class="form-control" id="inputUsername" type="text" name="username" value="" size="50" />
+                    <label for="inputPassword" class="form-label ">Password</label>
+                    <input class="form-control" id="inputPassword" type="password" name="password" value="" size="50" />
+                </div>
+                <button class="btn btn-light me-3" type="submit" value="submit" >Login</button>
+                <button class="btn btn-light" id="signup" onclick="window.location= '{% url 'simplify_main_app:register' %}'">Signup</button>
+            </form>
+        </div>
     </div>
 </div>
-
+<div class="mt-5 mb-5">
+    <!-- second div giving preview of available courses -->
+    <hr class="mb-5" />
+    <h2 class="title-text text-center mb-5">Courses</h2>
+    <div class="contianer mx-5">
+        <div id="carouselCaptions" class="carousel slide mx-5" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#carouselCaptions" data-bs-slide-to="1"></li>
+                <li data-bs-target="#carouselCaptions" data-bs-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="#"><!-- Course1 -->
+                    <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                <h5>First Course Title</h5>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href="#"><!-- Course2 -->
+                    <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                <h5>Second Course Title</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href="#"><!-- Course3 -->
+                    <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                <h5>Third Course Title</h5>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                </div>
+            </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselCaptions" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}
