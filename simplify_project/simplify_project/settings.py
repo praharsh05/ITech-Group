@@ -130,3 +130,6 @@ STATICFILES_DIRS = [STATIC_DIR,]
 #for media file hosting
 MEDIA_ROOT= MEDIA_DIR
 MEDIA_URL = '/media/'
+
+
+AUTH_USER_MODEL = 'simplify_main_app.User'
