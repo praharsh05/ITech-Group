@@ -78,9 +78,10 @@ def forum(request):
     return render(request, 'simplify_main_app/forum.html', context)
 
 #dashboard view
-@login_required
+# @login_required
 def dashboard(request):
-    return HttpResponse("Your Dashboard")
+    context = {}
+    return render(request, 'simplify_main_app/dashboard.html', context)
 
 
 #logout view
