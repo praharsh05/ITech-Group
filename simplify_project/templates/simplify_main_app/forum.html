@@ -1,0 +1,62 @@
+{% extends 'simplify_main_app/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Forum
+{% endblock %}
+{% block body_block %}
+<div class="container">
+    <h1 class="title-text text-center mt-5">Forum</h1>
+    <div class="mx-5 mt-5">
+        <!-- Posts -->
+        <!-- Only example post, more posts can be generated using loop -->
+        <div class="card mx-5">
+            <div class="card-body">
+              <h5 class="card-title title-text">Post title</h5>
+              <p class="mb-3 main-text">[user name]</p>
+              <p class="card-text main-text mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <ul class="list-group list-group-flush main-text">
+              <li class="list-group-item"><span class="ms-3">[user1]: </span>Cras justo odio <a class="ms-5 reply-link" >reply</a> </li>
+              <li class="list-group-item"><span class="ms-3">[user2]: </span>Dapibus ac facilisis in <a class="ms-5 reply-link" >reply</a></li>
+                <!-- new comment here, these are example comment, can be generated using loop  -->
+              <li class="list-group-item"><span class="ms-3">[user3]: </span>Vestibulum at eros <a class="ms-5 reply-link" >reply</a></li>
+            </ul>
+            <div class="card-body">
+              <span class="title-text ms-3">Add your comment here</span>
+              <form class="row ms-3 mt-3">
+                <div class="col-9">
+                  <input type="text" class="form-control" id="comment-input">
+                </div>
+                <div class="col-auto ms-3">
+                  <button type="submit" class="btn btn-primary mb-3">Sent</button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h1 class="title-text mt-5">New Post</h1>
+        <form class="main-text ms-5">
+            <div class="mb-3 mt-5 col-3">
+              <label for="titleInput" class="form-label">Title</label>
+              <input type="text" class="form-control" id="titleInput">
+            </div>
+            <div class="mb-3 me-5">
+              <label for="textArea" class="form-label">Content</label>
+              <textarea class="form-control" id="textArea" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Sent</button>
+          </form>
+    </div>
+</div>
+<script>
+    $(function(){
+        $(".reply-link").click(function(e){
+            let username = $(e.target).parent().children()[0].innerHTML;
+            let comment = "@" + username + $("#comment-input").val();
+            $("#comment-input").val(comment);
+        });
+    });
+</script>
+{% endblock %}

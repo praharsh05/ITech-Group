@@ -53,6 +53,10 @@
                             <a class="nav-link" aria-current="page" aria-current="page"
                                 href="#">Courses</a>
                         </li>
+                        <li class="nav-item me-4">
+                            <a class="nav-link" aria-current="page" aria-current="page"
+                                href="{% url 'simplify_main_app:forum' %}">Forum</a>
+                        </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link me-4" aria-current="page"
