@@ -20,6 +20,7 @@ Forum
               <li class="list-group-item"><span class="ms-3">[user1]: </span>Cras justo odio <a class="ms-5 reply-link" >reply</a> </li>
               <li class="list-group-item"><span class="ms-3">[user2]: </span>Dapibus ac facilisis in <a class="ms-5 reply-link" >reply</a></li>
                 <!-- new comment here, these are example comment, can be generated using loop  -->
+              <li class="list-group-item"><span class="ms-5">[user4]: </span>Vestibulum at eros <a class="ms-5 reply-link" >reply</a></li>
               <li class="list-group-item"><span class="ms-3">[user3]: </span>Vestibulum at eros <a class="ms-5 reply-link" >reply</a></li>
             </ul>
             <div class="card-body">
@@ -73,9 +74,13 @@ Forum
 <script>
     $(function(){
         $(".reply-link").click(function(e){
-            let username = $(e.target).parent().children()[0].innerHTML;
-            let comment = "@" + username + $("#comment-input").val();
-            $("#comment-input").val(comment);
+            if ( $("#reply-input").length > 0 ) { 
+                $("#reply-input").remove();
+            }else{
+                let replyArea = "<li id='reply-input' class='list-group-item'><div class='input-group'><input type='text' id='reply' class='form-control'></input><button type='submit' class='btn btn-primary'>send</button></div></li>";
+                $(e.target).parent().append(replyArea);
+                $("#reply").val("@" + $(e.target).parent().children()[0].innerHTML);
+            }              
         });
     });
 </script>
