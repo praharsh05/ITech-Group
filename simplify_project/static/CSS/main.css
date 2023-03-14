@@ -1,5 +1,40 @@
-.navbar{/*setting the background color*/
+html {
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 40rem;
+    min-height: 100%;
+    font-family: Helvetica, serif;;
+  }
+  
+ 
+#top{
     background-color: #955fe1;
+    overflow: hidden;
+    position:relative;
+    top: 0;
+    width: 100%;
+}
+ #bottom{
+    background-color: #955fe1;
+    overflow:hidden;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width:100%;
+    padding: 1rem;
+    
 }
 /* decreasing the navbar logo */
 .navbar-brand-logo{

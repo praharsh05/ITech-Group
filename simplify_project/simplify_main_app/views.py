@@ -74,9 +74,9 @@ def user_login(request):
 
 
 #dashboard view
-@login_required
+# @login_required
 def dashboard(request):
-    return HttpResponse("Your Dashboard")
+    return render(request,'simplify_main_app/dashboard.html');
 
 
 #logout view
