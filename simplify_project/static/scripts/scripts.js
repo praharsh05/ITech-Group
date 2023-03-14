@@ -52,3 +52,33 @@ var count = 0;
             console.log(inc)
             slider.style.left = count + "px";
         }
+
+        
+        function next2() {
+            if (inc !== itemslide + itemleft) {
+                if (inc == itemslide) {
+                    inc = inc + itemleft;
+                    count = count - (screen.width / itemDisplay) * itemleft;
+                }
+                else {
+                    inc++;
+                    count = count - screen.width;
+                }
+            }
+            slider.style.left = count + "px";
+        }
+
+        function prev2() {
+            if (inc !== 0) {
+                if (inc == itemleft) {
+                    inc = inc - itemleft;
+                    count = count + (screen.width / itemDisplay) * itemleft;
+                }
+                else {
+                    inc--;
+                    count = count + screen.width;
+                }
+            }
+            console.log(inc)
+            slider.style.left = count + "px";
+        }
