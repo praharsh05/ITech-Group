@@ -1,5 +1,15 @@
+.body{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    z-index: -1;
+    width:100%;
+    height:100%;
+    background-image: url('../images/bg-1.png');
+}
 .navbar{/*setting the background color*/
-    background-color: #955fe1;
+    /* background-color: #955fe1; */
+    /* filter: opacity(50%); */
 }
 /* decreasing the navbar logo */
 .navbar-brand-logo{
@@ -38,6 +48,7 @@
 .copyright{
     text-align: center;
 }
+
 /* back to top button */
 /* bg style of BTT button */
 .toTop-arrow {
@@ -96,3 +107,59 @@
     .title-text{
         font-family: LibreBaskerville_B;
     }
+
+.intro{
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+}
+/* h2 heading */
+.h2{
+    padding: 1rem 1rem;
+    text-align: center;
+}
+
+.home-grid{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    /* padding: 1rem; */
+}
+.home-img{
+    margin: auto;
+    position: relative;
+    padding: auto;
+    max-width: 30%;
+}
+.intro-p{
+    margin: auto;
+    padding: 1rem;
+}
+.home-login-signup{
+    margin: auto;
+    padding: 1rem;
+    border-style: solid;
+    border-radius: 20px;
+    /* border-color: black; */
+}
+.home-heading{
+    padding-top: 1rem;
+}
+#login_form{
+    padding: 1rem;
+    position: relative;
+    justify-content: space-between;
+}
+.home-input{
+    position: relative;
+    display: grid;
+    align-items: center;
+    /* padding: 1em; */
+}
+#signup{
+    margin: auto;
+    /* padding-bottom: 1rem; */
+}
+
+
+

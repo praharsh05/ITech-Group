@@ -6,11 +6,12 @@ Home
 {% endblock %}
 
 {% block body_block %}
-<div>
+<div class="intro">
     <!-- first div containing intro and login -->
     {% if user.is_authenticated %}
     Welcome {{ user.first_name }}!
     {% endif %}
+
     <h2 class="text-center mt-5 mb-5 title-text">Introduction</h2>
     <div class="row mb-5">
         <div class="col-4 px-3">
