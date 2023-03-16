@@ -59,7 +59,7 @@
                                 href="{% url 'simplify_main_app:forum' %}">Forum</a>
                         </li>
                         {% if user.is_authenticated %}
-                        {% if user.user_profile.type == 'STD' %}
+                        {% if user.role == 'STD' %}
                         <li class="nav-item"><a class="nav-link active" aria-current="page"
                                 href="{% url 'simplify_main_app:student-dashboard' %}">Student Dashboard</a>
                         </li>

@@ -3,9 +3,8 @@
 {% block title_block %}
 Dashboard
 {% endblock %}
-
 {% block body_block %}
-
+<h1 class="title-text text-center mt-5">Dashboard</h1>
 <section class="bg-light">
     <div class="container">
         <div class="row">
@@ -37,104 +36,17 @@ Dashboard
                                 </ul>
                             </div>
                         </div>
+                        <div class="col-2 ms-3">
+                            <!-- add modal to edit profile -->
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div> <button type="button" class="btn btn-secondary btn-lg">Edit Profile</button></div>
         </div>
     </div>
 </section>
-<div style="margin-bottom: 8px">
-<div class="d-print-table p-4 bg-secondary text-white"> 
-My Courses
 
-</div>
-
-</div>
-<div class="slider-container" item-display-d="4" item-display-t="3" item-display-m="1">
-    <div class="slider-width">
-        <div class="item"><a href="#"><img src="{% static 'images/course1.jpg' %}" style="width: 300px; height:200px"> </img></a></div>
-        <div class="item"><a href="#">Course 2</div></a>
-        <div class="item"><a href="#">Course 3</div></a>
-        <div class="item"><a href="#">Course 4</div></a>
-        <div class="item"><a href="#">Course 5</div></a>
-        <div class="item"><a href="#">Course 6</div></a>
-        <div class="item"><a href="#">Course 7</div></a>
-        <div class="item"><a href="#">Course 8</div></a>
-        <div class="item"><a href="#">Course 9</div></a>
-        <div class="item"><a href="#">Course 10</div></a>
-        <div class="item"><a href="#">Course 11</div></a>
-        <div class="item"><a href="#">Course 12</div></a>
-        <div class="item"><a href="#">Course 13</div></a>
-        <div class="item"><a href="#">Course 14</div></a>
-        <div class="item"><a href="#">Course 15</div></a>
-        <div class="item"><a href="#">Course 16</div></a>
-    </div>
-</div>
-<div style="margin: 8px">
-    <button type="button" class="btn btn-secondary btn-lg" onclick="prev()">Prev</button>
-    <button align="left" type="button" class="btn btn-secondary btn-lg" onclick="next()">Next</button>
-
-</div>
-
-<div style="margin-bottom: 8px; margin-top: 200px">
-    <div class="d-print-table p-4 bg-secondary text-white"> 
-    Available Courses
-    
-    </div>
-    
-    </div>
-    <div class="slider-container" item-display-d="4" item-display-t="3" item-display-m="1">
-        <div class="slider-width">
-            <div class="item">Course 1</div>
-            <div class="item">Course 2</div>
-            <div class="item">Course 3</div>
-            <div class="item">Course 4</div>
-            <div class="item">Course 5</div>
-            <div class="item">Course 6</div>
-            <div class="item">Course 7</div>
-            <div class="item">Course 8</div>
-            <div class="item">Course 9</div>
-            <div class="item">Course 10</div>
-            <div class="item">Course 11</div>
-            <div class="item">Course 12</div>
-            <div class="item">Course 13</div>
-            <div class="item">Course 14</div>
-            <div class="item">Course 15</div>
-            <div class="item">Course 16</div>
-        </div>
-    </div>
-    <div style="margin: 8px">
-        <button type="button" class="btn btn-secondary btn-lg" onclick="prev()">Prev</button>
-        <button align="left" type="button" class="btn btn-secondary btn-lg" onclick="next()">Next</button>
-{% extends 'simplify_main_app/base.html' %}
-{% load staticfiles %}
-{% block title_block %}
-Dashboard
-{% endblock %}
-{% block body_block %}
-<h1 class="title-text text-center mt-5">Dashboard</h1>
-<div class="row mb-5 mt-5">
-    <div class="col-4 px-3">
-        <img class="d-block w-100" src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
-    </div>
-    <div class="col-5 px-3">
-        <span class="title-text">Description</span>
-        </br>
-        <span>[username]</span>
-        <span>[usertype]</span>
-        <!-- eg: lisa, tutor -->
-        <p class="main-text mt-3">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
-            perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!
-        </p>
-    </div>
-    <div class="col-2 ms-3">
-        <!-- add modal to edit profile -->
-        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
-    </div>
-</div>
 <!-- modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -169,9 +81,6 @@ Dashboard
     </div>
 </div>
     
-
-    </div>
-{% endblock %}
 <h2 class="title-text mt-5">Courses</h2>
 <div class="row">
     <!-- courses -->

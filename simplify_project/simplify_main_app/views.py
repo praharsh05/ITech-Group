@@ -79,11 +79,12 @@ def dashboard(request):
 
 @login_required
 def student_dashboard(request):
-    return HttpResponse("Student Dashboard")
+    context = {}
+    return render(request, 'simplify_main_app/dashboard.html', context)
 
 #dashboard view
-# @login_required
-def dashboard(request):
+@login_required
+def tutor_dashboard(request):
     return render(request,'simplify_main_app/dashboard.html')
 
 
