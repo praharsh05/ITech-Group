@@ -18,6 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- cutom CSS -->
     <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/my.css' %}">
     <!-- Title tag -->
     <title>
         Simplify
@@ -58,7 +59,7 @@
                                 href="{% url 'simplify_main_app:forum' %}">Forum</a>
                         </li>
                         {% if user.is_authenticated %}
-                        {% if user.user_profile.type == 'STD' %}
+                        {% if user.role == 'STD' %}
                         <li class="nav-item"><a class="nav-link active" aria-current="page"
                                 href="{% url 'simplify_main_app:student-dashboard' %}">Student Dashboard</a>
                         </li>

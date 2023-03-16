@@ -72,14 +72,14 @@ def forum(request):
 
 #dashboard view
 
-# @login_required
+@login_required
 def dashboard(request):
     context = {}
     return render(request, 'simplify_main_app/dashboard.html', context)
 
 @login_required
 def student_dashboard(request):
-    return HttpResponse("Student Dashboard")
+    return render(request, 'simplify_main_app/dashboard.html')
 
 #dashboard view
 @login_required
