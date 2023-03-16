@@ -69,3 +69,20 @@ class TutorProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created and instance.role == 'TUT':
         TutorProfile.objects.create(user=instance)
+
+
+
+class Course(models.Model):
+    # course_id = models.AutoField(unique=True)
+    course_name = models.CharField(max_length=128)
+    introduction = models.CharField(max_length=1024)
+    material = models.URLField()
+
+    def save(self, *args, **kwargs):
+        super(Course,self).save(*args,**kwargs)
+
+    class Meta:
+        verbose_name_plural = 'Courses'
+    
+    def __str__(self):
+        return self.course_id
