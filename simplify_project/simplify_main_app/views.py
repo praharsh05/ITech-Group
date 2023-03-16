@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from simplify_main_app.forms import UserForm
+from simplify_main_app.forms import UserForm, CourseForm
 from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views import View
+from simplify_main_app.models import Course
 
 # Create your views here.
 #HomePage
@@ -94,3 +96,29 @@ def user_logout(request):
     logout(request)
     return redirect(reverse('simplify_main_app:index'))
 
+
+class showCourseView(View):
+    def get(self,request):
+        context_dict ={}
+        try:
+            course_name = Course.objects.all()
+            context_dict['courses']=course_name
+        except Course.DoesNotExist:
+            context_dict['course']=None
+
+        return render(request,'simplify_main_app/course.html', context_dict)
+
+
+class addCourseView(View):
+    def get(self,request):
+        course_form = CourseForm()
+        return render(request, 'simplify_main_app/add_course.html', {'form': course_form})
+    
+    def post(self, request):
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect(reverse('simplify_main_app:index'))
+        else:
+            print(form.errors)
+            return render(request, 'simplify_main_app/add_course.html', {'form': form})
