@@ -65,8 +65,18 @@ def user_login(request):
         #no context variable to pass to the template system hence blank dict
         return render(request, 'simplify_main_app/login.html')
 
+# Profile page
+def forum(request):
+    context = {}
+    return render(request, 'simplify_main_app/forum.html', context)
 
 #dashboard view
+
+# @login_required
+def dashboard(request):
+    context = {}
+    return render(request, 'simplify_main_app/dashboard.html', context)
+
 @login_required
 def student_dashboard(request):
     return HttpResponse("Student Dashboard")
@@ -75,6 +85,7 @@ def student_dashboard(request):
 @login_required
 def tutor_dashboard(request):
     return HttpResponse("Tutor Dashboard")
+
 
 
 #logout view
