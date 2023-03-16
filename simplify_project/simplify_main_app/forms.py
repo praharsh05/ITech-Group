@@ -2,7 +2,7 @@ from django import forms
 
 from django.forms import ModelForm, TextInput, EmailInput, Select
 from django.contrib.auth.models import User
-from simplify_main_app.models import UserProfile
+from simplify_main_app.models import User
 
 
 
@@ -27,7 +27,7 @@ class UserForm(forms.ModelForm):
                 'class': "form-control",
                 'style': 'max-width: 300px;'
                 }),
-             'type': Select(attrs={
+             'role': Select(attrs={
                 'class': "form-select",
                 'style': 'max-width: 120px;'
             })
