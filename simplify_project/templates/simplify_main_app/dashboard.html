@@ -1,0 +1,104 @@
+{% extends 'simplify_main_app/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+Dashboard
+{% endblock %}
+{% block body_block %}
+<h1 class="title-text text-center mt-5">Dashboard</h1>
+<div class="row mb-5 mt-5">
+    <div class="col-4 px-3">
+        <img class="d-block w-100" src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
+    </div>
+    <div class="col-5 px-3">
+        <span class="title-text">Description</span>
+        </br>
+        <span>[username]</span>
+        <span>[usertype]</span>
+        <!-- eg: lisa, tutor -->
+        <p class="main-text mt-3">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
+            perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!
+        </p>
+    </div>
+    <div class="col-2 ms-3">
+        <!-- add modal to edit profile -->
+        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
+    </div>
+</div>
+<!-- modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Edit profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="emailInput" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Firstname</label>
+                    <input type="text" class="form-control" id="nameInput">
+                </div>
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Lastname</label>
+                    <input type="text" class="form-control" id="nameInput">
+                </div>
+                <div class="mb-3">
+                    <label for="PswInput" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="PswInput">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="title-text mt-5">Courses</h2>
+<div class="row">
+    <!-- courses -->
+    <!-- these are example courses, just loop one to generate -->
+    <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Course title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <a href="#" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
+    <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Course title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <a href="#" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
+    <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Course title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <a href="#" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
+    <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Course title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <a href="#" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

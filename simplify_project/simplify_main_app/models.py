@@ -1,18 +1,71 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
 #creating a databse for users
-class UserProfile(models.Model):
-    
-    std = 'STD'
-    tut = 'TUT'
-    typeChoice = [(std, 'Student'),
-                  (tut, 'Tutor')]
-    user = models.OneToOneField(User , on_delete=models.CASCADE)
-    type = models.CharField(max_length=3, choices=typeChoice, default=std, blank=False)
 
-    def __str__(self):
-        return self.user.username
+class User(AbstractUser):
+    class Role(models.TextField):
+        STUDENT = 'STD'
+        TUTOR = 'TUT'
+        typeChoice = [(STUDENT, 'Student'),
+                    (TUTOR, 'Tutor')]
 
+    role = models.CharField(max_length=3, choices=Role.typeChoice,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            return super().save(*args, **kwargs)
+
+#to query student
+class StudentManager(BaseUserManager):
+    def get_queryset(self, *args, **kwargs):
+        results = super().get_queryset(*args, **kwargs)
+        return results.filter(role=User.Role.STUDENT)
+
+#proxy table for student
+class Student(User):
+    base_role = User.Role.STUDENT
+    student = StudentManager()
+    class Meta:
+        proxy = True
+
+#on creation of the a student instance in user table create an entry in student profile
+@receiver(post_save, sender=Student)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created and instance.role == 'STD':
+        StudentProfile.objects.create(user=instance)
+
+#student profile
+class StudentProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    student_id = models.IntegerField(null=True, blank=True)
+    course_id = models.IntegerField(null=True, blank=True)
+
+#to query tutor table
+class TutorManager(BaseUserManager):
+    def get_queryset(self, *args, **kwargs):
+        results = super().get_queryset(*args, **kwargs)
+        return results.filter(role=User.Role.TUTOR)
+
+
+class Tutor(User):
+    base_role = User.Role.TUTOR
+    tutor = TutorManager()
+    class Meta:
+        proxy = True
+
+#tutor profile
+class TutorProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    tutor_id = models.IntegerField(null=True, blank=True)
+    course_id = models.IntegerField(null=True, blank=True)
+
+#on creation of tutor user do this
+@receiver(post_save, sender=Tutor)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created and instance.role == 'TUT':
+        TutorProfile.objects.create(user=instance)

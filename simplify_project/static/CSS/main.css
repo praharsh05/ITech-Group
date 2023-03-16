@@ -1,16 +1,26 @@
+/* .body{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    z-index: -1;
+    width:100%;
+    height:100%;
+     background-image: url('../images/bg-1.png'); 
+}  */ 
 .navbar{/*setting the background color*/
-    background-color: #955fe1;
+    /* background-color: #955fe1; */
+    /* filter: opacity(50%); */
 }
 /* decreasing the navbar logo */
 .navbar-brand-logo{
     max-width: 30%;
 }
 /* trying to wrap the logo in the a tag*/
-.navbar-brand{
+/* .navbar-brand{
     max-width: 30%;
-    margin: 0;
+    margin: 0; */
     /* padding: 1rem 1rem; */
-}
+/* } */
 /* for positioning of the footer elements */
 .footer-container{
     display: grid;
@@ -28,7 +38,7 @@
 }
 /* reducing the image in the footer */
 .footer-img{
-    max-width: 60%;
+    max-width: 65%;
 }
 /* alignment of the top link */
 .top-link{
@@ -38,3 +48,118 @@
 .copyright{
     text-align: center;
 }
+
+/* back to top button */
+/* bg style of BTT button */
+.toTop-arrow {
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 33%;
+    opacity: 0.7;
+    background: black;
+    cursor: pointer;
+    position: fixed;
+    right: 3rem;
+    bottom: 3rem;
+    display: none;
+}
+
+/* arrow of BTT button */
+.toTop-arrow::before, .toTop-arrow::after {
+    width: 31px;
+    height: 7px;
+    border-radius: 3px;
+    background: #955fe1;
+    position: absolute;
+    content: "";
+}
+
+.toTop-arrow::before {
+    transform: rotate(-45deg) translate(0, -50%);
+    left: 0.4rem;
+}
+
+.toTop-arrow::after {
+    transform: rotate(45deg) translate(0, -50%);
+    right: 0.4rem;
+}
+
+/* disable focus */
+.toTop-arrow:focus {
+    outline: none;
+}
+
+/* font */
+@font-face{
+    font-family: LibreBaskerville;
+    src: url('../font/LibreBaskerville-Regular.ttf');
+    }
+    .main-text{
+        font-family: LibreBaskerville;
+    }
+@font-face{
+    font-family: LibreBaskerville_B;
+    src: url('../font/LibreBaskerville-Bold.ttf');
+    }
+    .title-text{
+        font-family: LibreBaskerville_B;
+    }
+
+.intro{
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+}
+/* h2 heading */
+.h2{
+    padding: 1rem 1rem;
+    text-align: center;
+}
+
+.home-grid{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    /* padding: 1rem; */
+}
+.home-img{
+    margin: auto;
+    position: relative;
+    padding: auto;
+    max-width: 30%;
+}
+.intro-p{
+    margin: auto;
+    padding: 1rem;
+}
+.home-login-signup{
+    margin: auto;
+    padding: 1rem;
+    border-style: solid;
+    border-radius: 20px;
+    /* border-color: black; */
+}
+.home-heading{
+    padding-top: 1rem;
+}
+#login_form{
+    padding: 1rem;
+    position: relative;
+    justify-content: space-between;
+}
+.home-input{
+    position: relative;
+    display: grid;
+    align-items: center;
+    /* padding: 1em; */
+}
+#signup{
+    margin: auto;
+    /* padding-bottom: 1rem; */
+}
+
+
+
