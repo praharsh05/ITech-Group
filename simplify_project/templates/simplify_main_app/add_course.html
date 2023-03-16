@@ -1,0 +1,25 @@
+{% extends 'simplify_main_app/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Add course
+{% endblock %}
+
+{% block body_block %}
+<h1> Add a course</h1>
+<div>
+    <form id="course_form" method="post" action="{% url 'simplify_main_app:add_course' %}">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}
+        {% endfor %}
+        <br/>
+        <button class="btn btn primary" type="submit" name="submit">Add Course</button>
+    </form>
+</div>
+{% endblock %}
