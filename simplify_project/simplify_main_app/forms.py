@@ -1,8 +1,8 @@
 from django import forms
 
 from django.forms import ModelForm, TextInput, EmailInput, Select
-from django.contrib.auth.models import User
-from simplify_main_app.models import User
+# from django.contrib.auth.models import User
+from simplify_main_app.models import User, Course
 
 
 
@@ -33,4 +33,14 @@ class UserForm(forms.ModelForm):
             })
         }
     
+
+
+class CourseForm(forms.ModelForm):
+    course_name = forms.CharField(max_length=128, help_text="Please enter course name")
+    introduction = forms.CharField(max_length=1024,help_text="Please enter course introduction")
+    material = forms.URLField(help_text="please enter material url")
+
+    class Meta:
+        model = Course
+        fields ={'course_name','introduction','material',}
 

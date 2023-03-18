@@ -1,0 +1,16 @@
+{% extends 'simplify_main_app/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+{% if course %}
+{{course.name}}
+{% else %}
+Unknown course
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+{% if course %}
+<h1> {{course.name}}</h1>
+{% endif %}
+{% endblock %}

@@ -34,15 +34,17 @@ class Student(User):
         proxy = True
 
 #on creation of the a student instance in user table create an entry in student profile
-@receiver(post_save, sender=Student)
+@receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
+    print('inside create user profile for student')
     if created and instance.role == 'STD':
         StudentProfile.objects.create(user=instance)
+        instance.save()
 
 #student profile
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    student_id = models.IntegerField(null=True, blank=True)
+    # student_id = models.IntegerField(null=True, blank=True)
     course_id = models.IntegerField(null=True, blank=True)
 
 #to query tutor table
@@ -61,15 +63,32 @@ class Tutor(User):
 #tutor profile
 class TutorProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    tutor_id = models.IntegerField(null=True, blank=True)
+    # tutor_id = models.IntegerField(null=True, blank=True)
     course_id = models.IntegerField(null=True, blank=True)
 
 #on creation of tutor user do this
 @receiver(post_save, sender=Tutor)
 def create_user_profile(sender, instance, created, **kwargs):
+    print('inside create user profile for tutor')
     if created and instance.role == 'TUT':
         TutorProfile.objects.create(user=instance)
+        instance.save()
 
-class Courses(models.Model):
-    course_id = models.IntegerField(null=True, blank=True)
-    course_name=models.CharField(max_length=100,blank=True)
+
+
+class Course(models.Model):
+    # course_id = models.AutoField(unique=True)
+    course_name = models.CharField(max_length=128)
+    introduction = models.CharField(max_length=1024)
+    material = models.URLField()
+
+    def save(self, *args, **kwargs):
+        super(Course,self).save(*args,**kwargs)
+
+    class Meta:
+        verbose_name_plural = 'Courses'
+    
+    def __str__(self):
+        return self.course_name
+
+
