@@ -1,14 +1,4 @@
 
-/* body {
-    position: relative;
-    margin: 0;
-    padding-bottom: 10rem;
-    min-height: 100%;
-    font-family: times new roman, serif;
-  } */
-  a{
-    text-decoration: none;
-  }
 .card-style1 {
     box-shadow: 0px 0px 10px 0px rgb(89 75 128 / 9%);
 }
@@ -28,7 +18,7 @@
 }
 
 section {
-    padding: 20px;
+    padding: 30px;
     overflow: hidden;
     background: #fff;
 }
@@ -141,6 +131,7 @@ section {
     font-size: 40px;
     font-weight: 800;
 }
+
 /* .btn{
    background: rgb(85, 83, 83);
    border: none;
@@ -198,4 +189,3 @@ section {
     max-width: 250px;
     height: auto;
     /* border-radius: 20%; */
-  

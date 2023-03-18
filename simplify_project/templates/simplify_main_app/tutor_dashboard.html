@@ -19,7 +19,7 @@ Dashboard
                             <div class="col-lg-6 px-xl-10">
                                 <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                     <h3 class="h2 text-white mb-0">{{user.first_name}} {{user.last_name}}</h3>
-                                    <span class="text-primary">Student</span>
+                                    <span class="text-primary">Tutor</span>
                                 </div>
                                 <ul class="list-unstyled mb-1-9">
                                     <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">School:</span> School of xyz</li>
@@ -38,7 +38,9 @@ Dashboard
                         </div>
                         <div class="col-2 ms-3">
                             <!-- add modal to edit profile -->
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit Profile</button>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin-bottom: 10px">Edit Profile</button>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" style="margin-bottom: 10px">Add Course</button>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" style="margin-bottom: 10px">View my students</button>
                         </div>
                     </div>
                 </div>
@@ -48,6 +50,7 @@ Dashboard
 </section>
 
 <!-- modal -->
+
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -55,27 +58,115 @@ Dashboard
                 <h5 class="modal-title" id="staticBackdropLabel">Edit profile</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
+            <div class="container d-flex justify-content-center mt-5">
+            <form class="mb-5 main-text" id="user_form" method="post" action="{% url 'simplify_main_app:register' %}" enctype="multipart/form-data">
+                {% csrf_token %}
             <div class="modal-body">
                 <div class="mb-3">
+                    <label for="emailInput" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control mb-3" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
                     <label for="emailInput" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
+                    <input type="email" name="email" class="form-control mb-3" id="emailInput" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
-                    <label for="nameInput" class="form-label">Firstname</label>
-                    <input type="text" class="form-control" id="nameInput">
+                    <label for="nameInput" class="form-label">First name</label>
+                    <input type="text" name="first_name" class="form-control mb-3" id="nameInput">
                 </div>
                 <div class="mb-3">
-                    <label for="nameInput" class="form-label">Lastname</label>
-                    <input type="text" class="form-control" id="nameInput">
+                    <label for="nameInput" class="form-label">Last name</label>
+                    <input type="text" name="last_name" class="form-control mb-3" id="nameInput">
                 </div>
                 <div class="mb-3">
                     <label for="PswInput" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="PswInput">
+                    <input type="password" name="password" class="form-control mb-3" id="PswInput">
                 </div>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">save changes</button>
+                <button type="submit" class="btn btn-primary" value="Register">Save Changes</button>
+                <!-- <input class="btn btn-dark mt-3" type="submit" name="submit" value="Submit" /> -->
+            </div>
+        </form>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+
+<!-- <div  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <h1 class="title-text text-center mt-5">Edit Profile</h1>
+{% if registered %}
+
+<div class="container d-flex justify-content-center mt-5">
+    <form class="mb-5 main-text" id="user_form" method="post" action="{% url 'simplify_main_app:tutor_dashboard' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{user_form.as_p}}
+        {{profile_form.as_p}}
+        <input class="btn btn-dark mt-3" type="submit" name="submit" value="Register" />
+    </form>
+</div>
+{% endif %}
+</div> -->
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Course</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="emailInput" class="form-label">Course Name</label>
+                    <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Course ID</label>
+                    <input type="text" class="form-control" id="nameInput">
+                </div>
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Course Description</label>
+                    <input type="text" class="form-control" id="nameInput">
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">My Students</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="emailInput" class="form-label">Name:</label>
+                    <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Course ID</label>
+                    <input type="text" class="form-control" id="nameInput">
+                </div>
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Course Description</label>
+                    <input type="text" class="form-control" id="nameInput">
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
         </div>
     </div>
@@ -88,7 +179,7 @@ Dashboard
     <div class="card col-3 mx-4 my-4">
         <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">{{user .course_id}}</h5>
+          <h5 class="card-title">{{course_id.}}</h5>
           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
             autem voluptas vel molestiae reiciendis placeat quis.</p>
           <a href="#" class="btn btn-primary">Enter</a>
@@ -122,46 +213,5 @@ Dashboard
         </div>
     </div>
 </div>
-   
-<h2 class="title-text mt-5">Available Courses</h2>
-<div class="row">
-    <!-- courses -->
-    <!-- these are example courses, just loop one to generate -->
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-</div>
+ 
 {% endblock %}

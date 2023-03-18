@@ -69,3 +69,7 @@ class TutorProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created and instance.role == 'TUT':
         TutorProfile.objects.create(user=instance)
+
+class Courses(models.Model):
+    course_id = models.IntegerField(null=True, blank=True)
+    course_name=models.CharField(max_length=100,blank=True)
