@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from simplify_main_app.models import Course
+from simplify_main_app.models import Course, StudentProfile,TutorProfile
 
 # Create your views here.
 #HomePage
@@ -27,6 +27,10 @@ def register(request):
             user.set_password(user.password)
             user.save()
             registered=True
+            if user.role=='STD':
+                profile= StudentProfile.objects.update_or_create(user_id=user.id)
+            else:
+                profile=TutorProfile.objects.update_or_create(user_id=user.id)
         else:
             print(user_form.errors)
     else:
@@ -115,10 +119,10 @@ class addCourseView(View):
         return render(request, 'simplify_main_app/add_course.html', {'form': course_form})
     
     def post(self, request):
-        form = CourseForm(request.POST)
-        if form.is_valid():
-            form.save(commit=True)
+        course_form = CourseForm(request.POST)
+        if course_form.is_valid():
+            course_form.save(commit=True)
             return redirect(reverse('simplify_main_app:index'))
         else:
-            print(form.errors)
-            return render(request, 'simplify_main_app/add_course.html', {'form': form})
+            print(course_form.errors)
+            return render(request, 'simplify_main_app/add_course.html', {'form': course_form})
