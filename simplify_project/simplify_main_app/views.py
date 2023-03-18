@@ -85,41 +85,19 @@ def dashboard(request):
 
 @login_required
 def student_dashboard(request):
-    conn=sqlite3.connect('db.sqlite3')
     context = {}
     return render(request, 'simplify_main_app/dashboard.html', context)
 
 #dashboard view
 @login_required
 def tutor_dashboard(request):
-    if request.method == 'POST':
-        #user_form = UserForm(request.POST)
-        username=request.POST['username']
-        email=request.POST['email']
-        first_name=request.POST['first_name']
-        last_name=request.POST['last_name']
-        password=request.POST['password']
-        user = authenticate(username = username, password = password)
-
-        # If we have a User object, the details are correct.
-        # If None (Python's way of representing the absence of a value), no user
-        # with matching credentials was found.
-        if user:
-            #is the account active? it could have been disabled
-            if user.is_active:
-                #if the account is valid and active we can log the user in
-                #we will send the user back to homepage
-                login(request,user)
-                return redirect(reverse('simplify_main_app:index'))
-            else:
-                #an inactive account was used - no longer loging in
-                return HttpResponse("Your Simplify account is disabled.")
-        else:
-            #bad login details were provided, so we can't log user in
-            print(f"Invalid user details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
-    context={}
-    return render(request, 'simplify_main_app/tutor_dashboard.html',context)
+    context_dict ={}
+    try:
+        course_name = Course.objects.all()
+        context_dict['courses']=course_name
+    except Course.DoesNotExist:
+        context_dict['course']=None
+    return render (request, 'simplify_main_app/tutor_dashboard.html', context_dict)
     # return render(request, 'simplify_main_app/tutor_dashboard.html')
 
 

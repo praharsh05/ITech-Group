@@ -78,13 +78,11 @@ def populate():
     
 
 def add_page(course_name,material,introduction):
-    # c=Course.objects.get_or_create(course_name=course_name)[0]
-    # c.introduction=introduction
-    # c.material=material
-    # c.save()
-    # return c
-    c=Course.objects.get_or_create(course_name=course_name)
-    print (course_name)
+    c=Course.objects.get_or_create(course_name=course_name)[0]
+    c.introduction=introduction
+    c.material=material
+    c.save()
+    return c
 
 #start execution here
 if __name__ == '__main__':
