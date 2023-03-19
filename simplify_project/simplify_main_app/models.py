@@ -43,9 +43,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 #student profile
 class StudentProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # student_id = models.IntegerField(null=True, blank=True)
     course_id = models.IntegerField(null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # student_id = models.IntegerField(null=True, blank=True)
 
 #to query tutor table
 class TutorManager(BaseUserManager):
@@ -62,9 +62,10 @@ class Tutor(User):
 
 #tutor profile
 class TutorProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # tutor_id = models.IntegerField(null=True, blank=True)
     course_id = models.IntegerField(null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # tutor_id = models.IntegerField(null=True, blank=True)
+    
 
 #on creation of tutor user do this
 @receiver(post_save, sender=Tutor)

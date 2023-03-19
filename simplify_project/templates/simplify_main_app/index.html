@@ -22,7 +22,7 @@ Home
             autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
             perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!
         </p>
-    
+    {% if not user.is_authenticated %}
     <!-- Login form -->
         <div class="col-3 px-3">
             <h3 class="title-text">Login/Sign up</h3>
@@ -39,6 +39,7 @@ Home
             </form>
         </div>
     </div>
+    {% endif %}
 </div>
 <div class="mt-5 mb-5">
     <!-- second div giving preview of available courses -->

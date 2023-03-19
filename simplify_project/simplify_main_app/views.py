@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from simplify_main_app.models import Course, StudentProfile,TutorProfile
+from simplify_main_app.models import Course, StudentProfile,TutorProfile,User
 
 # Create your views here.
 #HomePage
@@ -92,9 +92,12 @@ def student_dashboard(request):
     context_dict ={}
     try:
         course_name = Course.objects.all()
+        studentprofile=StudentProfile.objects.all()
         context_dict['courses']=course_name
+        context_dict['students']=studentprofile
     except Course.DoesNotExist:
         context_dict['course']=None
+        context_dict['students']=None
     return render (request, 'simplify_main_app/dashboard.html', context_dict)
 
 #dashboard view
@@ -103,9 +106,12 @@ def tutor_dashboard(request):
     context_dict ={}
     try:
         course_name = Course.objects.all()
+        tutorprofile= TutorProfile.objects.all()
         context_dict['courses']=course_name
+        context_dict['tutors']=tutorprofile
     except Course.DoesNotExist:
         context_dict['course']=None
+        context_dict['tutors']=None
     return render (request, 'simplify_main_app/tutor_dashboard.html', context_dict)
     # return render(request, 'simplify_main_app/tutor_dashboard.html')
 
