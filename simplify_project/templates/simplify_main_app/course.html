@@ -2,15 +2,30 @@
 {% load staticfiles %}
 
 {% block title_block %}
-{% if course %}
-{{course.name}}
-{% else %}
-Unknown course
-{% endif %}
+    {% if course %}
+        {{course.name}}
+    {% else %}
+        Unknown course
+    {% endif %}
 {% endblock %}
 
 {% block body_block %}
-{% if course %}
-<h1> {{course.name}}</h1>
-{% endif %}
+<div>
+    {% if course %}
+        <h1> {{course.course_name}}</h1><br />
+        <p>{{course.introduction}}</p>
+        {% if materials %}
+            <ul>
+                {% for material in materials %}
+                    <li><a href="{{material.url}}">{{material.url}}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>No material currently in the course</strong>
+        {% endif %}
+    {% else %}
+            The Specified course does not exists.
+    {% endif %}
+</div>
+    
 {% endblock %}
