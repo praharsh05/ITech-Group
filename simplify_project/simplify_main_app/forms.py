@@ -36,11 +36,10 @@ class UserForm(forms.ModelForm):
 
 
 class CourseForm(forms.ModelForm):
-    name = forms.CharField(max_length=128, help_text="Please enter course name")
+    course_name = forms.CharField(max_length=128, help_text="Please enter course name")
     introduction = forms.CharField(max_length=1024,help_text="Please enter course introduction")
-    material = forms.URLField(help_text="please enter material url")
 
     class Meta:
         model = Course
-        fields ={'name','introduction','material',}
+        fields ={'course_name','introduction',}
 
