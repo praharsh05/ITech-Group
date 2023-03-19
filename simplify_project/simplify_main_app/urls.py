@@ -11,6 +11,6 @@ urlpatterns= [
     path('tutor-dashboard/', views.tutor_dashboard, name='tutor-dashboard'),
     path('logout/', views.user_logout, name='logout'),
     path('forum/', views.forum, name='forum'),
-    path('course/', showCourseView.as_view(), name='course'),
+    path('course/<slug:course_name_slug>/', showCourseView.as_view(), name='course'),
     path('add_course/',addCourseView.as_view(),name='add_course')
 ]

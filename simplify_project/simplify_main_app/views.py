@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from simplify_main_app.models import Course, StudentProfile,TutorProfile,User
+from simplify_main_app.models import Course, StudentProfile,TutorProfile, Material,User
 
 # Create your views here.
 #HomePage
@@ -130,15 +130,21 @@ def user_logout(request):
 
 
 class showCourseView(View):
-    def get(self,request):
-        context_dict ={}
-        try:
-            course_name = Course.objects.all()
-            context_dict['courses']=course_name
-        except Course.DoesNotExist:
-            context_dict['course']=None
-
+    def get(self,request,course_name_slug):
+        context_dict =self.helper(course_name_slug)
         return render(request,'simplify_main_app/course.html', context_dict)
+    
+    def helper(self,course_name_slug):
+        context_dict = {}
+        try:
+            course = Course.objects.get(slug=course_name_slug)
+            materials = Material.objects.filter(material=course)
+            context_dict['materials']=materials
+            context_dict['course']=course
+        except Course.DoesNotExist:
+            context_dict['materials']=None
+            context_dict['course']=None
+        return context_dict
 
 
 class addCourseView(View):
