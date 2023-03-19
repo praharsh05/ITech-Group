@@ -174,44 +174,46 @@ Dashboard
     
 <h2 class="title-text mt-5">My Courses</h2>
 <div class="row">
+    {% for c in courses %}
     <!-- courses -->
     <!-- these are example courses, just loop one to generate -->
     <div class="card col-3 mx-4 my-4">
         <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">{{courses.course_name}}</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <h5 class="card-title">{{c.course_name}}</h5>
+          <p class="card-text">{{c.introduction}}</p>
           <a href="#" class="btn btn-primary">Enter</a>
         </div>
     </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
+    {%endfor%}
 </div>
+    {% comment %} <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Course title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <a href="#" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
+    <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Course title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <a href="#" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
+    <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Course title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <a href="#" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
+</div> {% endcomment %}
  
 {% endblock %}

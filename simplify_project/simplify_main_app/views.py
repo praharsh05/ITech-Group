@@ -10,9 +10,13 @@ from simplify_main_app.models import Course, StudentProfile,TutorProfile
 # Create your views here.
 #HomePage
 def index(request):
-    context_dict = {}
-    response = render(request, 'simplify_main_app/index.html', context=context_dict)
-    return response
+    context_dict ={}
+    try:
+        course_name = Course.objects.all()
+        context_dict['courses']=course_name
+    except Course.DoesNotExist:
+        context_dict['course']=None
+    return render (request, 'simplify_main_app/index.html', context_dict)
 
 
 #Register Page
@@ -85,8 +89,13 @@ def dashboard(request):
 
 @login_required
 def student_dashboard(request):
-    context = {}
-    return render(request, 'simplify_main_app/dashboard.html', context)
+    context_dict ={}
+    try:
+        course_name = Course.objects.all()
+        context_dict['courses']=course_name
+    except Course.DoesNotExist:
+        context_dict['course']=None
+    return render (request, 'simplify_main_app/dashboard.html', context_dict)
 
 #dashboard view
 @login_required
