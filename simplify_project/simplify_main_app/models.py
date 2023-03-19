@@ -81,7 +81,6 @@ class Course(models.Model):
     # course_id = models.AutoField(unique=True)
     course_name = models.CharField(max_length=128)
     introduction = models.CharField(max_length=1024)
-    # material = models.URLField()
     slug= models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
