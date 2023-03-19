@@ -70,6 +70,14 @@ def forum(request):
     context = {}
     return render(request, 'simplify_main_app/forum.html', context)
 
+def course(request):
+    context = {}
+    return render(request, 'simplify_main_app/course.html', context)
+
+def aboutUs(request):
+    context = {}
+    return render(request, 'simplify_main_app/about_us.html', context)
+
 #dashboard view
 
 # @login_required
