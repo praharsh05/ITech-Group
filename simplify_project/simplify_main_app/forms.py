@@ -2,7 +2,7 @@ from django import forms
 
 from django.forms import ModelForm, TextInput, EmailInput, Select
 # from django.contrib.auth.models import User
-from simplify_main_app.models import User, Course
+from simplify_main_app.models import User, Course, StudentProfile
 
 
 
@@ -43,4 +43,5 @@ class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields ={'course_name','introduction','material',}
+
 

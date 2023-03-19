@@ -90,6 +90,12 @@ def dashboard(request):
 @login_required
 def student_dashboard(request):
     context_dict ={}
+    # if request.method =='POST':
+    #     username= request.POST.get('username')
+    #     id = request.POST.get('course_id')
+    #     for u in User.objects.all():
+    #         if (u.username == username):
+    #             t=StudentProfile.objects.get_or_create(course_id=id,user=u)
     try:
         course_name = Course.objects.all()
         studentprofile=StudentProfile.objects.all()
