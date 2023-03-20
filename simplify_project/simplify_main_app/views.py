@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from simplify_main_app.forms import UserForm, CourseForm, ProfileForm
+from simplify_main_app.forms import UserForm, CourseForm,MaterialForm, ProfileForm
 from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from simplify_main_app.models import Course, StudentProfile,TutorProfile,User,Profile
+from django.utils.decorators import method_decorator
+from simplify_main_app.models import Course, StudentProfile,TutorProfile,User,Profile, Material
 from django.db.models import Q
 import populate_courses
 # Create your views here.
@@ -162,7 +163,9 @@ class addCourseView(View):
     def post(self, request):
         course_form = CourseForm(request.POST)
         if course_form.is_valid():
-            course_form.save(commit=True)
+            tutor_profile=course_form.save(commit=False)
+            tutor_profile.tutor= request.user
+            course_form.save()
             return redirect(reverse('simplify_main_app:index'))
         else:
             print(course_form.errors)
@@ -218,3 +221,36 @@ class ProfileView(View):
 #         return render(request, 'simplify_main_app/profile.html', {'form': profileform})
 
     
+
+class AddMaterialView(View):
+    def helper(self,course_name_slug):
+        try:
+            course = Course.objects.get(slug=course_name_slug)
+        except Course.DoesNotExist:
+            course=None
+        return course
+
+    @method_decorator(login_required)
+    def get(self,request,course_name_slug):
+        course=self.helper(course_name_slug)
+        if course==None:
+            return redirect('simplify_main_app/add_course.html')
+        else:
+            material_form =MaterialForm()
+            context_dict={'form':material_form , 'course':course}
+            return render(request, 'simplify_main_app/add_material.html', context_dict)
+
+    @method_decorator(login_required)
+    def post(self,request,course_name_slug):
+        course = self.helper(course_name_slug)
+        material_form = MaterialForm(request.POST)
+        if material_form.is_valid():
+            if course:
+                courseMaterial = material_form.save(commit=False)
+                courseMaterial.material=course
+                courseMaterial.save()
+
+                return redirect(reverse('simplify_main_app:course',kwargs={'course_name_slug':course_name_slug}))
+        else:
+            print(material_form.errors)
+        return

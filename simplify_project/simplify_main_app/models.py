@@ -62,10 +62,10 @@ class Tutor(User):
         proxy = True
 
 #tutor profile
-class TutorProfile(models.Model):
-    course_id = models.IntegerField(null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # tutor_id = models.IntegerField(null=True, blank=True)
+# class TutorProfile(models.Model):
+#     course_id = models.IntegerField(null=True, blank=True)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     # tutor_id = models.IntegerField(null=True, blank=True)
     
 
 #on creation of tutor user do this
@@ -79,7 +79,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 
 class Course(models.Model):
-    # course_id = models.AutoField(unique=True)
+    tutor = models.ForeignKey(User,on_delete=models.CASCADE)
     course_name = models.CharField(max_length=128)
     introduction = models.CharField(max_length=1024)
     slug= models.SlugField(unique=True)
@@ -109,4 +109,12 @@ class Profile(models.Model):
     def __str__(self):
         return self.url
     def __str__(self):
-        return self.firstname
+        return self.firstname 
+
+
+#tutor profile
+class TutorProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    course= models.ManyToManyField(Course,blank=True,default=None)
+
+
