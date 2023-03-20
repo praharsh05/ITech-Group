@@ -49,26 +49,6 @@ class CourseForm(forms.ModelForm):
         fields ={'course_name','introduction'}
 
 
-
-#form for adding a URL in the material field
-class MaterialForm(forms.ModelForm):
-    url = forms.URLField(help_text="Please enter the URL of the material")
-
-    class Meta:
-        model=Material
-        exclude = ('material',)
-
-    def clean(self):#taken from tango with django book
-        cleaned_data = self.cleaned_data
-        url = cleaned_data.get('url')
-        # if url is not empty and does not start with 'http://',
-        #then prepend 'http://'
-        if url and not (url.startswith('http://') or url.startswith('https://')):
-            url = f'http://{url}'
-            cleaned_data['url'] = url
-
-        return cleaned_data
-
 #form for adding a URL in the material field
 class MaterialForm(forms.ModelForm):
     url = forms.URLField(help_text="Please enter the URL of the material")
