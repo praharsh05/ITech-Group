@@ -5,14 +5,9 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views import View
-<<<<<<< HEAD
 from simplify_main_app.models import Course, StudentProfile,TutorProfile,User,Profile
 from django.db.models import Q
 import populate_courses
-=======
-from simplify_main_app.models import Course, StudentProfile,TutorProfile, Material,User
-
->>>>>>> 67b603ebba037abb3fe5a56bf33849422fe3ae95
 # Create your views here.
 #HomePage
 def index(request):

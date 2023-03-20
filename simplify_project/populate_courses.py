@@ -95,8 +95,7 @@ def populate():
     # t.first_name='Alan'
     # t.last_name='Smith'
     # print(t.first_name)
-    t=Profile.objects.get(id=1)
-    print (t.firstname)
+    
     add_student_course()
     
     
