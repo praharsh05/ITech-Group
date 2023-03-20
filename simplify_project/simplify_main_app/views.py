@@ -129,7 +129,9 @@ class addCourseView(View):
     def post(self, request):
         course_form = CourseForm(request.POST)
         if course_form.is_valid():
-            course_form.save(commit=True)
+            tutor_profile=course_form.save(commit=False)
+            tutor_profile.tutor= request.user
+            course_form.save()
             return redirect(reverse('simplify_main_app:index'))
         else:
             print(course_form.errors)
