@@ -8,18 +8,21 @@ Add course
 {% block body_block %}
 <h1> Add a course</h1>
 <div>
-    <form id="course_form" method="post" action="{% url 'simplify_main_app:add_course' %}">
-        {% csrf_token %}
-        {% for hidden in form.hidden_fields %}
-            {{ hidden }}
-        {% endfor %}
-        {% for field in form.visible_fields %}
-            {{ field.errors }}
-            {{ field.help_text }}
-            {{ field }}
-        {% endfor %}
-        <br/>
-        <button class="btn btn-dark mt-3" type="submit" name="submit">Add Course</button>
-    </form>
+    {% if user.is_authenticated %}
+        {% if user.role == 'TUT' %}
+            <form id="course_form" method="post" action="{% url 'simplify_main_app:add_course' %}">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {{ field }}
+                {% endfor %}
+                <br/>
+                <button class="btn btn-dark mt-3" type="submit" name="submit">Add Course</button>
+            </form>
+        {% else %}
+        <p>Not authorised to create a course</p>
+        {% endif %}
+    {% endif %}
 </div>
 {% endblock %}
