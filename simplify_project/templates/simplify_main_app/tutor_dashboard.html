@@ -101,8 +101,7 @@ Dashboard
 <h2 class="title-text mt-5">My Courses</h2>
 <div class="row">
     {% for c in courses %}
-    {% for t in tutors %}
-    {% if t.user_id == user.id and c.id == t.course_id %}
+    {% if c.tutor_id == user.id  %}
     <!-- courses -->
     <!-- these are example courses, just loop one to generate -->
     <div class="card col-3 mx-4 my-4">
@@ -114,7 +113,6 @@ Dashboard
         </div>
     </div>
     {% endif %}
-    {% endfor %}
     {% endfor %}
 </div>
     {% comment %} <div class="card col-3 mx-4 my-4">

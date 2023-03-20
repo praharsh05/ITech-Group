@@ -42,12 +42,6 @@ def create_user_profile(sender, instance, created, **kwargs):
         StudentProfile.objects.create(user=instance)
         instance.save()
 
-#student profile
-class StudentProfile(models.Model):
-    course_id = models.IntegerField(null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # student_id = models.IntegerField(null=True, blank=True)
-
 #to query tutor table
 class TutorManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
@@ -79,7 +73,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 
 class Course(models.Model):
-    tutor = models.ForeignKey(User,on_delete=models.CASCADE)
+    tutor = models.ForeignKey(User,null=True, on_delete=models.CASCADE)
     course_name = models.CharField(max_length=128)
     introduction = models.CharField(max_length=1024)
     slug= models.SlugField(unique=True)
@@ -114,7 +108,13 @@ class Profile(models.Model):
 
 #tutor profile
 class TutorProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    course= models.ManyToManyField(Course,blank=True,default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course= models.OneToOneField(Course,null=True, blank=True,default=None, on_delete=models.CASCADE)
 
+
+#student profile
+class StudentProfile(models.Model):
+    course= models.ManyToManyField(Course, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # student_id = models.IntegerField(null=True, blank=True)
 
