@@ -5,9 +5,14 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views import View
+<<<<<<< HEAD
 from simplify_main_app.models import Course, StudentProfile,TutorProfile,User,Profile
 from django.db.models import Q
 import populate_courses
+=======
+from simplify_main_app.models import Course, StudentProfile,TutorProfile, Material,User
+
+>>>>>>> 67b603ebba037abb3fe5a56bf33849422fe3ae95
 # Create your views here.
 #HomePage
 def index(request):
@@ -94,6 +99,12 @@ def dashboard(request):
 @login_required
 def student_dashboard(request):
     context_dict ={}
+    # if request.method =='POST':
+    #     username= request.POST.get('username')
+    #     id = request.POST.get('course_id')
+    #     for u in User.objects.all():
+    #         if (u.username == username):
+    #             t=StudentProfile.objects.get_or_create(course_id=id,user=u)
     try:
         id=request.user.id
         course_name = Course.objects.all()
@@ -131,15 +142,21 @@ def user_logout(request):
 
 
 class showCourseView(View):
-    def get(self,request):
-        context_dict ={}
-        try:
-            course_name = Course.objects.all()
-            context_dict['courses']=course_name
-        except Course.DoesNotExist:
-            context_dict['course']=None
-
+    def get(self,request,course_name_slug):
+        context_dict =self.helper(course_name_slug)
         return render(request,'simplify_main_app/course.html', context_dict)
+    
+    def helper(self,course_name_slug):
+        context_dict = {}
+        try:
+            course = Course.objects.get(slug=course_name_slug)
+            materials = Material.objects.filter(material=course)
+            context_dict['materials']=materials
+            context_dict['course']=course
+        except Course.DoesNotExist:
+            context_dict['materials']=None
+            context_dict['course']=None
+        return context_dict
 
 
 class addCourseView(View):

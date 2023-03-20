@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 
@@ -81,17 +82,21 @@ class Course(models.Model):
     # course_id = models.AutoField(unique=True)
     course_name = models.CharField(max_length=128)
     introduction = models.CharField(max_length=1024)
-    material = models.URLField()
+    slug= models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
-        super(Course,self).save(*args,**kwargs)
+        self.slug= slugify(self.course_name)
+        super(Course, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'Courses'
     
     def __str__(self):
         return self.course_name
-
+    
+class Material(models.Model):
+    material = models.ForeignKey(Course, on_delete=models.CASCADE)
+    url = models.URLField()
 class Profile(models.Model):
     firstname = models.CharField(max_length=128)
     lastname = models.CharField(max_length=128)
@@ -101,5 +106,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name_plural = 'Profiles'
     
+    def __str__(self):
+        return self.url
     def __str__(self):
         return self.firstname
