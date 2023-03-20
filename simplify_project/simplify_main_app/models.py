@@ -61,11 +61,7 @@ class Tutor(User):
     class Meta:
         proxy = True
 
-#tutor profile
-class TutorProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # tutor_id = models.IntegerField(null=True, blank=True)
-    course_id = models.IntegerField(null=True, blank=True)
+
 
 #on creation of tutor user do this
 @receiver(post_save, sender=Tutor)
@@ -78,7 +74,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 
 class Course(models.Model):
-    # course_id = models.AutoField(unique=True)
+    tutor = models.ForeignKey(User,on_delete=models.CASCADE)
     course_name = models.CharField(max_length=128)
     introduction = models.CharField(max_length=1024)
     slug= models.SlugField(unique=True)
@@ -99,3 +95,9 @@ class Material(models.Model):
 
     def __str__(self):
         return self.url
+
+
+#tutor profile
+class TutorProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    course= models.ManyToManyField(Course,blank=True,default=None)
