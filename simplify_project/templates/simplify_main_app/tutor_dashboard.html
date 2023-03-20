@@ -17,31 +17,20 @@ Dashboard
                             </div>
                             
                             <div class="col-lg-6 px-xl-10">
-                                <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                {% comment %} <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                     <h3 class="h2 text-white mb-0">{{user.first_name}} {{user.last_name}}</h3>
                                     <span class="text-primary">Tutor</span>
-                                </div>
+                                </div> {% endcomment %}
                                 <ul class="list-unstyled mb-1-9">
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">School:</span> School of xyz</li>
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Year:</span> First</li>
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> xyz@mail.com</li>
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone:</span> 01234-56789</li>
-                                    <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Address:</span> </li>
-                                </ul>
-                                <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
-                                    <li><a href="#!"><i class="ti-twitter-alt"></i></a></li>
-                                    <li><a href="#!"><i class="ti-facebook"></i></a></li>
-                                    <li><a href="#!"><i class="ti-pinterest"></i></a></li>
-                                    <li><a href="#!"><i class="ti-instagram"></i></a></li>
-                                </ul>
+                                    <h3>Welcome {{user.first_name}} {{user.last_name}}</h3>
+                                  </ul>
                             </div>
                         </div>
                         <div class="col-2 ms-3">
                             <!-- add modal to edit profile -->
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin-bottom: 10px">Edit Profile</button>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" style="margin-bottom: 10px">Add Course</button>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" style="margin-bottom: 10px">View my students</button>
-                        </div>
+                            <button class="btn btn-outline-primary" onclick="window.location= '{% url 'simplify_main_app:profile' %}'" style="margin-bottom: 10px">Edit Profile</button>
+                            <button class="btn btn-outline-primary" onclick="window.location= '{% url 'simplify_main_app:add_course' %}'" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" style="margin-bottom: 10px">Add Course</button>
+                            
                     </div>
                 </div>
             </div>
@@ -51,7 +40,7 @@ Dashboard
 
 <!-- modal -->
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+{% comment %} <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -79,10 +68,6 @@ Dashboard
                     <label for="nameInput" class="form-label">Last name</label>
                     <input type="text" name="last_name" class="form-control mb-3" id="nameInput">
                 </div>
-                <div class="mb-3">
-                    <label for="PswInput" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control mb-3" id="PswInput">
-                </div>
                 
             </div>
             <div class="modal-footer">
@@ -95,7 +80,7 @@ Dashboard
         </div>
     </div>
 </div>
-</form>
+</form> {% endcomment %}
 
 
 <!-- <div  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -112,66 +97,7 @@ Dashboard
 </div>
 {% endif %}
 </div> -->
-<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Add Course</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="emailInput" class="form-label">Course Name</label>
-                    <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="nameInput" class="form-label">Course ID</label>
-                    <input type="text" class="form-control" id="nameInput">
-                </div>
-                <div class="mb-3">
-                    <label for="nameInput" class="form-label">Course Description</label>
-                    <input type="text" class="form-control" id="nameInput">
-                </div>
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">My Students</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="emailInput" class="form-label">Name:</label>
-                    <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="nameInput" class="form-label">Course ID</label>
-                    <input type="text" class="form-control" id="nameInput">
-                </div>
-                <div class="mb-3">
-                    <label for="nameInput" class="form-label">Course Description</label>
-                    <input type="text" class="form-control" id="nameInput">
-                </div>
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-    
 <h2 class="title-text mt-5">My Courses</h2>
 <div class="row">
     {% for c in courses %}

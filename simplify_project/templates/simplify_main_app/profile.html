@@ -1,0 +1,31 @@
+{% extends 'simplify_main_app/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Add course
+{% endblock %}
+
+{% block body_block %}
+<h1> Profile</h1>
+<div>
+    <form id="profile" method="post" action="{% url 'simplify_main_app:profile' %}">
+        {% csrf_token %}
+        {% comment %} <div class="mb-4">
+            <label for="firstname" class="form-label">First Name</label>
+            <input class="form-control mb-3" id="firstname" type="text" name="firstname" value="" size="50" />
+            <label for="lastname" class="form-label ">Last Name</label>
+            <input class="form-control" id="lastname" type="text" name="lastname" value="" size="50" />
+        </div> {% endcomment %}
+        {% comment %} {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}
+        {% endfor %} {% endcomment %}
+        <br/>
+        <button class="btn btn-dark mt-3" type="submit" name="submit">Save</button>
+    </form>
+</div>
+{% endblock %}

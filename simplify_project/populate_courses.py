@@ -1,12 +1,12 @@
 # File to populate the database
-
+from django.db.models import Q
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                         'simplify_project.settings')
 
 import django
 django.setup()
-from simplify_main_app.models import Course, TutorProfile, User, StudentProfile
+from simplify_main_app.models import Course, TutorProfile, User, StudentProfile, Profile
 
 def populate():
     tutor_1 = [
@@ -90,6 +90,13 @@ def populate():
             add_page(p['course_name'],p['material'], p['introduction'])
             add_tutor_course(current_tutor_id[i],p['id'])
         i+=1
+    # t=User.objects.get(id=2)
+    # print(t.first_name)
+    # t.first_name='Alan'
+    # t.last_name='Smith'
+    # print(t.first_name)
+    t=Profile.objects.get(id=1)
+    print (t.firstname)
     add_student_course()
     
     
@@ -104,12 +111,11 @@ def add_page(course_name,material,introduction):
     return c
 
 def add_tutor_course(i,id):
-
+    
     for u in User.objects.all().order_by('-role'):
         if (u.role=='TUT'):
             if (u.id==i):
                 t=TutorProfile.objects.get_or_create(course_id=id,user=u)
-                print (u.id)
                 # t.save()
             # TutorProfile.objects.get_or_create(id=i)[0]
             # c=TutorProfile.objects.create(course_id=id,user=u)

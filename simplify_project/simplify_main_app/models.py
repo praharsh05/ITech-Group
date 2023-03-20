@@ -92,4 +92,14 @@ class Course(models.Model):
     def __str__(self):
         return self.course_name
 
+class Profile(models.Model):
+    firstname = models.CharField(max_length=128)
+    lastname = models.CharField(max_length=128)
+    def save(self, *args, **kwargs):
+        super(Profile,self).save(*args,**kwargs)
 
+    class Meta:
+        verbose_name_plural = 'Profiles'
+    
+    def __str__(self):
+        return self.firstname

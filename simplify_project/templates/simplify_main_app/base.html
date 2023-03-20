@@ -43,10 +43,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- list of links in the navbar -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 main-text">
+                        {% if not user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link me-4" aria-current="page"
                                 href="{% url 'simplify_main_app:index' %}">Home</a>
                         </li>
+                        {%endif%}
                         <li class="nav-item me-4">
                             <a class="nav-link" aria-current="page" href="#">About Us</a>
                         </li>
