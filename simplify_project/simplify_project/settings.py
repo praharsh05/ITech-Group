@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'simplify_main_app',
+    'simplify_main_app.apps.SimplifyMainAppConfig'
 ]
 
 MIDDLEWARE = [
