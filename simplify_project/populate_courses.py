@@ -97,7 +97,7 @@ def populate():
     # t.last_name='Smith'
     # print(t.first_name)
     
-    add_student_course()
+    #add_student_course()
     k=0
     flag=0
     # for x in current_student_id:
@@ -142,15 +142,15 @@ def add_page(course_name,material,introduction, id):
 #     # print(c.course_id,c)
 #     # c.save()
 #     # return c
-def add_student_course():
-    i=1
-    for u in User.objects.all().order_by('-role'):
-        if (u.role=='STD'):
-            c=Course.objects.get(id=i)
-            s=StudentProfile.objects.get_or_create(course=c,user=u)
-            c=Course.objects.get(id=i+1)
-            s=StudentProfile.objects.get_or_create(course=c,user=u)
-            i+=1
+# def add_student_course():
+#     i=1
+#     for u in User.objects.all().order_by('-role'):
+#         if (u.role=='STD'):
+#             c=Course.objects.get(id=i)
+#             s=StudentProfile.objects.get_or_create(course=c,user=u)
+#             c=Course.objects.get(id=i+1)
+#             s=StudentProfile.objects.get_or_create(course=c,user=u)
+#             i+=1
 
 #start execution here
 if __name__ == '__main__':
