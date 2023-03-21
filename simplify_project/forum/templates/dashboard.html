@@ -4,66 +4,66 @@
 Dashboard
 {% endblock %}
 {% block body_block %}
-{#<h1 class="title-text text-center mt-5">Myaccount</h1>#}
-{#<div class="row mb-5 mt-5">#}
-{#    <div class="col-4 px-3">#}
-{#        <img class="d-block w-100" src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">#}
-{#    </div>#}
-{#    <div class="col-5 px-3">#}
-{#        <span class="title-text">Description</span>#}
-{#        </br>#}
-{#        <span>My Name:{{ user_info.4 }}</span>#}
-{#        <span>{{ user_info.5 }}</span>#}
-{#        <!-- eg: lisa, tutor -->#}
-{#        <p class="main-text mt-3">#}
-{#           {{ user_info.6 }}#}
-{#        </p>#}
-{#    </div>#}
-{#    <div class="col-2 ms-3">#}
-{#        <!-- add modal to edit profile -->#}
-{#        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>#}
-{#    </div>#}
-{#</div>#}
-{#<!-- modal -->#}
-{#<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">#}
-{#    <div class="modal-dialog">#}
-{#        <form action="." method="post">#}
-{#            {% csrf_token %}#}
-{#        <div class="modal-content">#}
-{#            <div class="modal-header">#}
-{#                <h5 class="modal-title" id="staticBackdropLabel">Edit profile</h5>#}
-{#                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
-{#            </div>#}
-{#            <div class="modal-body">#}
-{#                <div class="mb-3">#}
-{#                    <label for="emailInput" class="form-label">intro</label>#}
-{#                    <input type="text" class="form-control" id="emailInput" aria-describedby="emailHelp" name="intro">#}
-{#                </div>#}
-{#                <div class="mb-3">#}
-{#                    <label for="nameInput" class="form-label">Firstname</label>#}
-{#                    <input type="text" class="form-control" id="nameInput" name="f_name">#}
-{#                </div>#}
-{#                <div class="mb-3">#}
-{#                    <label for="nameInput" class="form-label">Lastname</label>#}
-{#                    <input type="text" class="form-control" id="nameInput" name="l_name">#}
-{#                </div>#}
-{#                 <div class="mb-3">#}
-{#                    <label for="nameInput" class="form-label">intro</label>#}
-{#                    <input type="text" class="form-control" id="nameInput" name="intro">#}
-{#                </div>#}
-{#                <div class="mb-3">#}
-{#                    <label for="PswInput" class="form-label">Password</label>#}
-{#                    <input type="password" class="form-control" id="PswInput">#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="modal-footer">#}
-{#                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
-{#                <button type="submit" class="btn btn-primary">save changes</button>#}
-{#            </div>#}
-{#        </div>#}
-{#            </form>#}
-{#    </div>#}
-{#</div>#}
+<h1 class="title-text text-center mt-5">Myaccount</h1>
+<div class="row mb-5 mt-5">
+    <div class="col-4 px-3">
+        <img class="d-block w-100" src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
+    </div>
+    <div class="col-5 px-3">
+        <span class="title-text">Description</span>
+        </br>
+        <span>My Name:{{ user_info.4 }}</span>
+        <span>{{ user_info.5 }}</span>
+        <!-- eg: lisa, tutor -->
+        <p class="main-text mt-3">
+           {{ user_info.6 }}
+        </p>
+    </div>
+    <div class="col-2 ms-3">
+        <!-- add modal to edit profile -->
+        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
+    </div>
+</div>
+<!-- modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="." method="post">
+            {% csrf_token %}
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Edit profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% comment %} <div class="mb-3">
+                    <label for="emailInput" class="form-label">intro</label>
+                    <input type="text" class="form-control" id="emailInput" aria-describedby="emailHelp" name="intro">
+                </div> {% endcomment %}
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Firstname</label>
+                    <input type="text" class="form-control" id="nameInput" name="f_name">
+                </div>
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Lastname</label>
+                    <input type="text" class="form-control" id="nameInput" name="l_name">
+                </div>
+                 <div class="mb-3">
+                    <label for="nameInput" class="form-label">intro</label>
+                    <input type="text" class="form-control" id="nameInput" name="intro">
+                </div>
+                {% comment %} <div class="mb-3">
+                    <label for="PswInput" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="PswInput">
+                </div> {% endcomment %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">save changes</button>
+            </div>
+        </div>
+            </form>
+    </div>
+</div>
 
 <h2 class="title-text mt-5">Courses-Forum</h2>
 <div class="row">
@@ -81,32 +81,32 @@ Dashboard
     </div>
     {% endfor %}
 
-{#    <div class="card col-3 mx-4 my-4">#}
-{#        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">#}
-{#        <div class="card-body">#}
-{#          <h5 class="card-title">Course title</h5>#}
-{#          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum#}
-{#            autem voluptas vel molestiae reiciendis placeat quis.</p>#}
-{#          <a href="#" class="btn btn-primary">Enter</a>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="card col-3 mx-4 my-4">#}
-{#        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">#}
-{#        <div class="card-body">#}
-{#          <h5 class="card-title">Course title</h5>#}
-{#          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum#}
-{#            autem voluptas vel molestiae reiciendis placeat quis.</p>#}
-{#          <a href="#" class="btn btn-primary">Enter</a>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="card col-3 mx-4 my-4">#}
-{#        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">#}
-{#        <div class="card-body">#}
-{#          <h5 class="card-title">Course title</h5>#}
-{#          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum#}
-{#            autem voluptas vel molestiae reiciendis placeat quis.</p>#}
-{#          <a href="#" class="btn btn-primary">Enter</a>#}
-{#        </div>#}
-{#    </div>#}
+    <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Course title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <a href="#" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
+    <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Course title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <a href="#" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
+    <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Course title</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
+            autem voluptas vel molestiae reiciendis placeat quis.</p>
+          <a href="#" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
 </div>
 {% endblock %}
