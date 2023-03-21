@@ -8,7 +8,7 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from simplify_main_app.models import Course, StudentProfile,TutorProfile,User,Profile, Material
 from django.db.models import Q
-import populate_courses
+
 # Create your views here.
 #HomePage
 def index(request):
