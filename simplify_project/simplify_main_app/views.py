@@ -166,7 +166,7 @@ class addCourseView(View):
             tutor_profile=course_form.save(commit=False)
             tutor_profile.tutor= request.user
             course_form.save()
-            return redirect(reverse('simplify_main_app:index'))
+            return redirect(reverse('simplify_main_app:tutor-dashboard'))
         else:
             print(course_form.errors)
             return render(request, 'simplify_main_app/add_course.html', {'form': course_form})
