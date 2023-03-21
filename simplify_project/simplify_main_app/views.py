@@ -96,6 +96,7 @@ class StudentDashboardView(View):
     @method_decorator(login_required)
     def get(self,request):
         context_dict ={}
+        #check if the user is student or not
         if request.user.role=='STD':
             try:
                 id=request.user.id
@@ -103,7 +104,6 @@ class StudentDashboardView(View):
                 studentUser= StudentProfile.objects.get(user=request.user)#getting the user
                 studentCourse = studentUser.course.all()#getting the course for that user
                 context_dict['myCourses']=studentCourse#passing it in the context dict
-                
                 course_name = Course.objects.all()
                 context_dict['courses']=course_name
                 context_dict['courseid']=StudentProfile.objects.filter(Q(user_id=id))
@@ -115,11 +115,12 @@ class StudentDashboardView(View):
         else:
             return HttpResponse('Not Authorised')
 
-
+#tutor dashboard view
 class TutorDashboardView(View):
     @method_decorator(login_required)
     def get(self,request):
         context_dict ={}
+        #check if the user is tutor or not
         if request.user.role=='TUT':
             try:
                 course_name = Course.objects.all()
@@ -133,36 +134,7 @@ class TutorDashboardView(View):
         else:
             return HttpResponse('Not authorised')
     
-
-# Profile page
-def forum(request):
-    context = {}
-    return render(request, 'simplify_main_app/forum.html', context)
-
-#dashboard view
-
-# @login_required
-def dashboard(request):
-    context = {}
-    return render(request, 'simplify_main_app/dashboard.html', context)
-
-
-#dashboard view
-@login_required
-def tutor_dashboard(request):
-    context_dict ={}
-    try:
-        course_name = Course.objects.all()
-        tutorprofile= TutorProfile.objects.all()
-        context_dict['courses']=course_name
-        context_dict['tutors']=tutorprofile
-    except Course.DoesNotExist:
-        context_dict['course']=None
-        context_dict['tutors']=None
-    return render (request, 'simplify_main_app/tutor_dashboard.html', context_dict)
-    # return render(request, 'simplify_main_app/tutor_dashboard.html')
-
-
+#course view 
 class showCourseView(View):
     def get(self,request,course_name_slug):
         context_dict =self.helper(course_name_slug)
@@ -181,21 +153,30 @@ class showCourseView(View):
         return context_dict
 
 
+#add course view for tutor
 class addCourseView(View):
+    @method_decorator(login_required)
     def get(self,request):
-        course_form = CourseForm()
-        return render(request, 'simplify_main_app/add_course.html', {'form': course_form})
-    
-    def post(self, request):
-        course_form = CourseForm(request.POST)
-        if course_form.is_valid():
-            tutor_profile=course_form.save(commit=False)
-            tutor_profile.tutor= request.user
-            course_form.save()
-            return redirect(reverse('simplify_main_app:tutor-dashboard'))
-        else:
-            print(course_form.errors)
+        if request.user.role=='TUT':
+            course_form = CourseForm()
             return render(request, 'simplify_main_app/add_course.html', {'form': course_form})
+        else:
+            return HttpResponse('Not authorised to add a course')
+    
+    @method_decorator(login_required)
+    def post(self, request):
+        if request.user.role=='TUT':
+            course_form = CourseForm(request.POST)
+            if course_form.is_valid():
+                tutor_profile=course_form.save(commit=False)
+                tutor_profile.tutor= request.user
+                course_form.save()
+                return redirect(reverse('simplify_main_app:tutor-dashboard'))
+            else:
+                print(course_form.errors)
+                return render(request, 'simplify_main_app/add_course.html', {'form': course_form})
+        else:
+            return HttpResponse('Not Authorised to post this form')
 
 
 class ProfileView(View):
@@ -274,3 +255,8 @@ class addCourseStudentView(View):
             Student_course.course.add(course)
             Student_course.save()
         return redirect(reverse('simplify_main_app:student-dashboard'))
+    
+# Profile page
+def forum(request):
+    context = {}
+    return render(request, 'simplify_main_app/forum.html', context)

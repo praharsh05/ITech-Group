@@ -10,13 +10,13 @@ urlpatterns= [
     path('', IndexView.as_view(), name='index'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('student_dashboard/',StudentDashboardView.as_view(), name='student-dashboard'),
     path('tutor_dashboard/', TutorDashboardView.as_view(), name='tutor-dashboard'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('forum/', views.forum, name='forum'),
     path('course/<slug:course_name_slug>/', showCourseView.as_view(), name='course'),
     path('add_course/',addCourseView.as_view(),name='add_course'),
     path('course/<slug:course_name_slug>/add_material/',AddMaterialView.as_view(),name='add_material'),
     path('profile/',ProfileView.as_view(),name='profile'),
-    path('course/<slug:course_name_slug>/<course_id>', addCourseStudentView.as_view(),name='add_course_student')
+    path('course/<slug:course_name_slug>/<course_id>', addCourseStudentView.as_view(),name='add_course_student'),
+    path('forum/', views.forum, name='forum'),
 ]
