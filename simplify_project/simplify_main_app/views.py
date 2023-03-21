@@ -84,7 +84,12 @@ class LoginView(View):
             print(f"Invalid user details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
 
-
+#logout view
+class LogoutView(View):
+    @method_decorator(login_required)
+    def get(self,request):
+        logout(request)
+        return redirect(reverse('simplify_main_app:index'))
 
 # Profile page
 def forum(request):
@@ -133,13 +138,6 @@ def tutor_dashboard(request):
     # return render(request, 'simplify_main_app/tutor_dashboard.html')
 
 
-#logout view
-@login_required
-def user_logout(request):
-    logout(request)
-    return redirect(reverse('simplify_main_app:index'))
-
-
 class showCourseView(View):
     def get(self,request,course_name_slug):
         context_dict =self.helper(course_name_slug)
@@ -173,6 +171,8 @@ class addCourseView(View):
         else:
             print(course_form.errors)
             return render(request, 'simplify_main_app/add_course.html', {'form': course_form})
+
+
 class ProfileView(View):
     
     def get(self,request):
@@ -191,10 +191,6 @@ class ProfileView(View):
             print(f'First Name in the form:{firstName}')
             print(f'Last Name in the form:{lastName}')
             u=User.objects.update_or_create(id=id,first_name=firstName,last_name=lastName)
-            # u.first_name=p.firstname
-            # u.last_name=p.lastname
-            # print(u.first_name)
-            # u.save()
             
             if request.user.role=='STD':
                 
@@ -204,27 +200,7 @@ class ProfileView(View):
         else:
             print(ProfileForm.errors)
             return render(request, 'simplify_main_app/profile.html', {'form': profileform})
-# def ProfileView(request):
-#     profileform = ProfileForm()
-#     if request.method == 'POST':
-#         profileform = ProfileForm(request.POST)
-#         if profileform.is_valid():
-#             profileform.save(False)
-#             i=request.user.id
-#             u=User.objects.get(id=i)
-#             u.first_name=request.POST.get('firstname')
-#             u.last_name=request.POST.get('lastname')
-#             print(u.first_name)
-#             u.save()
-#             print(u.first_name)
-#             if User.role=='STD':
-                
-#                 return redirect(reverse('simplify_main_app:student-dashboard'))
-#             else:
-#                 return redirect(reverse('simplify_main_app:tutor-dashboard'))
-#     else:
-#         print(ProfileForm.errors)
-#         return render(request, 'simplify_main_app/profile.html', {'form': profileform})
+
 
     
 
