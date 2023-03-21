@@ -96,21 +96,43 @@ class StudentDashboardView(View):
     @method_decorator(login_required)
     def get(self,request):
         context_dict ={}
-        try:
-            id=request.user.id
-            #to show my courses
-            studentUser= StudentProfile.objects.get(user=request.user)#getting the user
-            studentCourse = studentUser.course.all()#getting the course for that user
-            context_dict['myCourses']=studentCourse#passing it in the context dict
-            
-            course_name = Course.objects.all()
-            context_dict['courses']=course_name
-            context_dict['courseid']=StudentProfile.objects.filter(Q(user_id=id))
-        except Course.DoesNotExist:
-            context_dict['course']=None
-            #context_dict['students']=None
-            context_dict['courseid']=None
-        return render (request, 'simplify_main_app/dashboard.html', context_dict)
+        if request.user.role=='STD':
+            try:
+                id=request.user.id
+                #to show my courses
+                studentUser= StudentProfile.objects.get(user=request.user)#getting the user
+                studentCourse = studentUser.course.all()#getting the course for that user
+                context_dict['myCourses']=studentCourse#passing it in the context dict
+                
+                course_name = Course.objects.all()
+                context_dict['courses']=course_name
+                context_dict['courseid']=StudentProfile.objects.filter(Q(user_id=id))
+            except Course.DoesNotExist:
+                context_dict['course']=None
+                #context_dict['students']=None
+                context_dict['courseid']=None
+            return render (request, 'simplify_main_app/dashboard.html', context_dict)
+        else:
+            return HttpResponse('Not Authorised')
+
+
+class TutorDashboardView(View):
+    @method_decorator(login_required)
+    def get(self,request):
+        context_dict ={}
+        if request.user.role=='TUT':
+            try:
+                course_name = Course.objects.all()
+                tutorprofile= TutorProfile.objects.all()
+                context_dict['courses']=course_name
+                context_dict['tutors']=tutorprofile
+            except Course.DoesNotExist:
+                context_dict['course']=None
+                context_dict['tutors']=None
+            return render (request, 'simplify_main_app/tutor_dashboard.html', context_dict)
+        else:
+            return HttpResponse('Not authorised')
+    
 
 # Profile page
 def forum(request):
@@ -124,24 +146,6 @@ def dashboard(request):
     context = {}
     return render(request, 'simplify_main_app/dashboard.html', context)
 
-@login_required
-def student_dashboard(request):
-    context_dict ={}
-    try:
-        id=request.user.id
-        #to show my courses
-        studentUser= StudentProfile.objects.get(user=request.user)#getting the user
-        studentCourse = studentUser.course.all()#getting the course for that user
-        context_dict['myCourses']=studentCourse#passing it in the context dict
-        
-        course_name = Course.objects.all()
-        context_dict['courses']=course_name
-        context_dict['courseid']=StudentProfile.objects.filter(Q(user_id=id))
-    except Course.DoesNotExist:
-        context_dict['course']=None
-        #context_dict['students']=None
-        context_dict['courseid']=None
-    return render (request, 'simplify_main_app/dashboard.html', context_dict)
 
 #dashboard view
 @login_required
