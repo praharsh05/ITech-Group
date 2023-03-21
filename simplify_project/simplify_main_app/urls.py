@@ -1,11 +1,13 @@
 from django.urls import path
 from simplify_main_app import views
 from simplify_main_app.views import showCourseView, addCourseView, AddMaterialView, ProfileView,addCourseStudentView
+from simplify_main_app.views import IndexView, RegisterView
+
 
 app_name='simplify_main_app'
 urlpatterns= [
-    path('', views.index, name='index'),
-    path('register/', views.register, name='register'),
+    path('', IndexView.as_view(), name='index'),
+    path('register/', RegisterView.as_view(), name='register'),
     path('login/', views.user_login, name='login'),
     path('student-dashboard/',views.student_dashboard, name='student-dashboard'),
     path('tutor-dashboard/', views.tutor_dashboard, name='tutor-dashboard'),
