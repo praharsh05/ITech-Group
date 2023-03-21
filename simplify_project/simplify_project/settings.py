@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'simplify_main_app',
+    'forum.apps.ForumConfig',
 ]
 
 MIDDLEWARE = [

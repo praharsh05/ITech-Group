@@ -26,4 +26,5 @@ urlpatterns = [
     path('simplify/', include('simplify_main_app.urls')),
     path('dashboard/',include('simplify_main_app.urls')),
     path('admin/', admin.site.urls),
+    path('forum/',include('forum.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
