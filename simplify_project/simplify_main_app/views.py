@@ -180,17 +180,20 @@ class ProfileView(View):
         profileform = ProfileForm(request.POST)
 
         if profileform.is_valid():
-            profileform.save(commit=True)
-            i=request.user.id
-            t=request.profileform.id
-            #populate_courses.updateProfile(i)
-            u=User.objects.update_or_create(id=i,first_name=request.POST.get('firstname'),last_name=request.POST.get('lastname'))
+            profileform.save(commit=False)
+            id=request.user.id
+            print(f'id of the user in the form:{id}')
+            firstName= request.POST['firstname']
+            lastName = request.POST['lastname']
+            print(f'First Name in the form:{firstName}')
+            print(f'Last Name in the form:{lastName}')
+            u=User.objects.update_or_create(id=id,first_name=firstName,last_name=lastName)
             # u.first_name=p.firstname
             # u.last_name=p.lastname
             # print(u.first_name)
             # u.save()
             
-            if User.role=='STD':
+            if request.user.role=='STD':
                 
                 return redirect(reverse('simplify_main_app:student-dashboard'))
             else:
