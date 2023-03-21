@@ -1,0 +1,39 @@
+{% extends 'simplify_main_app/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {% if course %}
+        {{course.name}}
+    {% else %}
+        Unknown course
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+<div>
+    {% if course %}
+        <h1> {{course.course_name}}</h1><br />
+        <p>{{course.introduction}}</p>
+        <!-- <p>{{course.id}} : course_id</p> -->
+        <button class="btn btn-dark mt-3" type="submit" name="submit" onclick="window.location='{% url 'simplify_main_app:add_course_student'  course.slug course.id %}'">Add to Your Course</button><br />
+        <!-- <a href="#">Add to Your Course</a><br /> -->
+        {% if materials %}
+            <ul>
+                {% for material in materials %}
+                    <li><a href="{{material.url}}">{{material.url}}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>No material currently in the course</strong>
+        {% endif %}
+        <div>
+            {% if user.role == 'TUT' %}
+                <a href="{% url 'simplify_main_app:add_material' course.slug %}">Add Material</a><br />
+            {% endif %}
+        </div>
+    {% else %}
+            The Specified course does not exists.
+    {% endif %}
+</div>
+    
+{% endblock %}
