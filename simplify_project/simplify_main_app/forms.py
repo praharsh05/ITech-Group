@@ -2,8 +2,7 @@ from django import forms
 
 from django.forms import ModelForm, TextInput, EmailInput, Select
 # from django.contrib.auth.models import User
-from simplify_main_app.models import User, Course, Material
-
+from simplify_main_app.models import User, Course, Material, StudentProfile, Profile
 
 
 #creating a user form to get details
@@ -33,15 +32,24 @@ class UserForm(forms.ModelForm):
             })
         }
     
+class ProfileForm(forms.ModelForm):
+    firstname = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control','style': 'max-width: 300px;'}),
+                                help_text="Enter First Name")
+    lastname = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control','style': 'max-width: 300px;'}),
+                               help_text="Enter Last Name")
 
-#form for adding a course
+    class Meta:
+        model = Profile
+        fields ={'firstname', 'lastname'}
+
 class CourseForm(forms.ModelForm):
     course_name = forms.CharField(max_length=128, help_text="Please enter course name")
     introduction = forms.CharField(max_length=1024,help_text="Please enter course introduction")
 
     class Meta:
         model = Course
-        fields ={'course_name','introduction',}
+        fields ={'course_name','introduction'}
+
 
 #form for adding a URL in the material field
 class MaterialForm(forms.ModelForm):

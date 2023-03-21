@@ -1,20 +1,24 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from simplify_main_app.forms import UserForm, CourseForm,MaterialForm
+from simplify_main_app.forms import UserForm, CourseForm,MaterialForm, ProfileForm
 from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from simplify_main_app.models import Course, StudentProfile,TutorProfile, Material
 from django.utils.decorators import method_decorator
-
+from simplify_main_app.models import Course, StudentProfile,TutorProfile,User,Profile, Material
+from django.db.models import Q
 
 # Create your views here.
 #HomePage
 def index(request):
-    context_dict = {}
-    response = render(request, 'simplify_main_app/index.html', context=context_dict)
-    return response
+    context_dict ={}
+    try:
+        course_name = Course.objects.all()
+        context_dict['courses']=course_name
+    except Course.DoesNotExist:
+        context_dict['course']=None
+    return render (request, 'simplify_main_app/index.html', context_dict)
 
 
 #Register Page
@@ -59,7 +63,10 @@ def user_login(request):
                 #if the account is valid and active we can log the user in
                 #we will send the user back to homepage
                 login(request,user)
-                return redirect(reverse('simplify_main_app:index'))
+                if user.role=='TUT':
+                    return redirect(reverse('simplify_main_app:tutor-dashboard'))
+                else:
+                    return redirect('simplify_main_app:student-dashboard')
             else:
                 #an inactive account was used - no longer loging in
                 return HttpResponse("Your Simplify account is disabled.")
@@ -87,13 +94,40 @@ def dashboard(request):
 
 @login_required
 def student_dashboard(request):
-    return HttpResponse("Student Dashboard")
+    context_dict ={}
+    # if request.method =='POST':
+    #     username= request.POST.get('username')
+    #     id = request.POST.get('course_id')
+    #     for u in User.objects.all():
+    #         if (u.username == username):
+    #             t=StudentProfile.objects.get_or_create(course_id=id,user=u)
+    try:
+        id=request.user.id
+        course_name = Course.objects.all()
+        #studentprofile=StudentProfile.objects.get(user_id=id)
+        context_dict['courses']=course_name
+        #context_dict['students']=studentprofile
+        context_dict['courseid']=StudentProfile.objects.filter(Q(user_id=id))
+    except Course.DoesNotExist:
+        context_dict['course']=None
+        #context_dict['students']=None
+        context_dict['courseid']=None
+    return render (request, 'simplify_main_app/dashboard.html', context_dict)
 
 #dashboard view
 @login_required
 def tutor_dashboard(request):
-    return HttpResponse("Tutor Dashboard")
-
+    context_dict ={}
+    try:
+        course_name = Course.objects.all()
+        tutorprofile= TutorProfile.objects.all()
+        context_dict['courses']=course_name
+        context_dict['tutors']=tutorprofile
+    except Course.DoesNotExist:
+        context_dict['course']=None
+        context_dict['tutors']=None
+    return render (request, 'simplify_main_app/tutor_dashboard.html', context_dict)
+    # return render(request, 'simplify_main_app/tutor_dashboard.html')
 
 
 #logout view
@@ -132,11 +166,64 @@ class addCourseView(View):
             tutor_profile=course_form.save(commit=False)
             tutor_profile.tutor= request.user
             course_form.save()
-            return redirect(reverse('simplify_main_app:index'))
+            return redirect(reverse('simplify_main_app:tutor-dashboard'))
         else:
             print(course_form.errors)
             return render(request, 'simplify_main_app/add_course.html', {'form': course_form})
+class ProfileView(View):
+    
+    def get(self,request):
+        profileform = ProfileForm()
+        return render(request, 'simplify_main_app/profile.html', {'form': profileform})
+        
+    def post(self, request):
+        profileform = ProfileForm(request.POST)
 
+        if profileform.is_valid():
+            profileform.save(commit=False)
+            id=request.user.id
+            print(f'id of the user in the form:{id}')
+            firstName= request.POST['firstname']
+            lastName = request.POST['lastname']
+            print(f'First Name in the form:{firstName}')
+            print(f'Last Name in the form:{lastName}')
+            u=User.objects.update_or_create(id=id,first_name=firstName,last_name=lastName)
+            # u.first_name=p.firstname
+            # u.last_name=p.lastname
+            # print(u.first_name)
+            # u.save()
+            
+            if request.user.role=='STD':
+                
+                return redirect(reverse('simplify_main_app:student-dashboard'))
+            else:
+                return redirect(reverse('simplify_main_app:tutor-dashboard'))
+        else:
+            print(ProfileForm.errors)
+            return render(request, 'simplify_main_app/profile.html', {'form': profileform})
+# def ProfileView(request):
+#     profileform = ProfileForm()
+#     if request.method == 'POST':
+#         profileform = ProfileForm(request.POST)
+#         if profileform.is_valid():
+#             profileform.save(False)
+#             i=request.user.id
+#             u=User.objects.get(id=i)
+#             u.first_name=request.POST.get('firstname')
+#             u.last_name=request.POST.get('lastname')
+#             print(u.first_name)
+#             u.save()
+#             print(u.first_name)
+#             if User.role=='STD':
+                
+#                 return redirect(reverse('simplify_main_app:student-dashboard'))
+#             else:
+#                 return redirect(reverse('simplify_main_app:tutor-dashboard'))
+#     else:
+#         print(ProfileForm.errors)
+#         return render(request, 'simplify_main_app/profile.html', {'form': profileform})
+
+    
 
 class AddMaterialView(View):
     def helper(self,course_name_slug):

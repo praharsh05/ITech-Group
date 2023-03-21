@@ -8,8 +8,8 @@
      background-image: url('../images/bg-1.png'); 
 }  */ 
 .navbar{/*setting the background color*/
-    /* background-color: #955fe1; */
-    /* filter: opacity(50%); */
+    /* background-color: #955fe1;  */
+    /* filter: opacity(50%);  */
 }
 /* decreasing the navbar logo */
 .navbar-brand-logo{
