@@ -10,39 +10,47 @@ from simplify_main_app.models import Course, StudentProfile,TutorProfile,User,Pr
 from django.db.models import Q
 
 # Create your views here.
-#HomePage
-def index(request):
-    context_dict ={}
-    try:
-        course_name = Course.objects.all()
-        context_dict['courses']=course_name
-    except Course.DoesNotExist:
-        context_dict['course']=None
-    return render (request, 'simplify_main_app/index.html', context_dict)
+
+#HomePage view
+class IndexView(View):
+    #get request for index page
+    def get(self, request):
+        context_dict ={}
+        try:
+            course_name = Course.objects.all()
+            context_dict['courses']=course_name
+        except Course.DoesNotExist:
+            context_dict['course']=None
+        return render (request, 'simplify_main_app/index.html', context_dict)
 
 
-#Register Page
+#Register Page view
+class RegisterView(View):
+    #get the register form
+    def get(self,request):
+        registered=False
+        user_form = UserForm()
+        return render(request, 'simplify_main_app/register.html',context={ 'user_form':user_form,
+                                                                      'registered':registered})
 
-def register(request):
-    registered=False
-    if request.method == 'POST':
+    #post the register form
+    def post(self,request):
+        registered=False
         user_form = UserForm(request.POST)
-
         if user_form.is_valid():
-            user = user_form.save(False)
+            user = user_form.save(commit=False)
             user.set_password(user.password)
             user.save()
-            registered=True
+            
             if user.role=='STD':
                 profile= StudentProfile.objects.update_or_create(user_id=user.id)
             else:
                 profile=TutorProfile.objects.update_or_create(user_id=user.id)
+            registered=True
+            return render(request, 'simplify_main_app/login.html')
         else:
             print(user_form.errors)
-    else:
-        user_form = UserForm()
-
-    return render(request, 'simplify_main_app/register.html',context={ 'user_form':user_form,
+        return render(request, 'simplify_main_app/register.html',context={ 'user_form':user_form,
                                                                       'registered':registered})
 
 #Login view
