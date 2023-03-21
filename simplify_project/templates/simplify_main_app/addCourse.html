@@ -1,0 +1,83 @@
+{% extends 'simplify_main_app/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+Add Course
+{% endblock %}
+{% block body_block %}
+<h1 class="title-text text-center mt-5">ADD A COURSE</h1>
+<h3 class="title-text my-5 ms-5">Basic Information</h3>
+<div class="container">
+    <!-- information field -->
+    <div class="row ms-5 main-text">
+        <div class="col-7 px-5" >
+            <!-- title & description -->
+            <div class="mb-3">
+                <label for="title" class="form-label">Course title</label>
+                <input type="text" class="form-control w-50" id="title">
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" rows="5"></textarea>
+              </div>
+        </div>
+        <div class="col-4" >
+            <!-- preview of the course img -->
+            <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100 mt-3" />
+            <div class="text-center mt-3"><button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#selectImgModal">Edit</button></div>
+            <!-- Edit img modal -->
+            <div class="modal fade" id="selectImgModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title">Select Course image</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">choose image to upload</label>
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-5" />
+</div>
+<h3 class="title-text my-5 ms-5">Course materials</h3>
+<div class="container ms-5">
+    <!-- add unit -->
+    <div class="main-text">
+        <span id="new-unit"></span>
+    </div>
+    <button class="btn btn-primary add-unit">add unit</button>
+    <div class="text-center mt-5">
+        <button class="btn btn-primary">Submit</button>
+    </div>
+</div>
+<script>
+    $(function(){
+        $(".add-unit").click(function(e){
+            let unitArea = "<ul><li class='row my-3'>Unit title:<input class='w-50 form-control ms-5' type='text'></input></li><li class='row'>material: <input class='form-control w-50 ms-5 mb-3' type='file'></input><button class='btn btn-danger col-1 mx-3 mb-3' onclick='deleteMaterial(event)'>delete</button></li><li class='row'><button class='btn btn-warning col-2' id='addmaterial' onclick='addMaterial(event)' >add material</button><button onclick='deleteUnit(event)' class='btn btn-danger col-2 ms-5'>delete unit</button></li></ul>";
+            $("#new-unit").before(unitArea);
+            //$(e.target).parent().append(replyArea);
+            //$("#reply").val("@" + $(e.target).parent().children()[0].innerHTML);   
+        });
+    });
+    function addMaterial(e){
+        let newInput = "<li class='row'>material: <input class='form-control w-50 ms-5 mb-3' type='file'></input><button class='btn btn-danger col-1 mx-3 mb-3' onclick='deleteMaterial(event)'>delete</button></li>";
+        $(e.target).parent().before(newInput);
+    }
+    function deleteMaterial(e){
+        $(e.target).parent().remove();
+    }
+    function deleteUnit(e){
+        $(e.target).parent().parent().remove();
+    }
+</script>
+{% endblock %}

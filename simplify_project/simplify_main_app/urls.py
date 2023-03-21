@@ -19,4 +19,7 @@ urlpatterns= [
     path('profile/',ProfileView.as_view(),name='profile'),
     path('course/<slug:course_name_slug>/<course_id>', addCourseStudentView.as_view(),name='add_course_student'),
     path('forum/', views.forum, name='forum'),
+    path('about-us/', views.aboutUs, name='about-us'),
+    path('course/', views.course, name='course'),
+    path('addCourse/', views.addCourse, name='add-course'),
 ]

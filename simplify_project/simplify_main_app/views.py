@@ -91,6 +91,7 @@ class LogoutView(View):
         logout(request)
         return redirect(reverse('simplify_main_app:index'))
 
+
 #student dashboard view
 class StudentDashboardView(View):
     @method_decorator(login_required)
@@ -114,6 +115,19 @@ class StudentDashboardView(View):
             return render (request, 'simplify_main_app/dashboard.html', context_dict)
         else:
             return HttpResponse('Not Authorised')
+
+#def course(request):
+#    context = {}
+#    return render(request, 'simplify_main_app/course.html', context)
+
+def aboutUs(request):
+    context = {}
+    return render(request, 'simplify_main_app/about_us.html', context)
+
+def addCourse(request):
+    context = {}
+    return render(request, 'simplify_main_app/addCourse.html', context)
+
 
 #tutor dashboard view
 class TutorDashboardView(View):
