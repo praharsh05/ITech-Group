@@ -33,14 +33,12 @@ class UserForm(forms.ModelForm):
         }
     
 class ProfileForm(forms.ModelForm):
-    firstname = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control','style': 'max-width: 300px;'}),
-                                help_text="Enter First Name")
-    lastname = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control','style': 'max-width: 300px;'}),
-                               help_text="Enter Last Name")
+    first_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control','style': 'max-width: 300px;'}))
+    last_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control','style': 'max-width: 300px;'}))
 
     class Meta:
-        model = Profile
-        fields ={'firstname', 'lastname'}
+        model = User
+        fields ={'first_name', 'last_name'}
 
 class CourseForm(forms.ModelForm):
     course_name = forms.CharField(max_length=128, help_text="Please enter course name")

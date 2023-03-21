@@ -167,57 +167,81 @@ class addCourseView(View):
         else:
             print(course_form.errors)
             return render(request, 'simplify_main_app/add_course.html', {'form': course_form})
-class ProfileView(View):
+# class ProfileView(View):
     
-    def get(self,request):
-        profileform = ProfileForm()
-        return render(request, 'simplify_main_app/profile.html', {'form': profileform})
+#     def get(self,request):
+#         profileform = ProfileForm()
+#         return render(request, 'simplify_main_app/profile.html', {'form': profileform})
         
-    def post(self, request):
-        profileform = ProfileForm(request.POST)
+#     def post(self, request):
+#         profileform = ProfileForm(request.POST, instance=request.user)
 
-        if profileform.is_valid():
-            profileform.save(commit=False)
-            id=request.user.id
-            print(f'id of the user in the form:{id}')
-            firstName= request.POST['firstname']
-            lastName = request.POST['lastname']
-            print(f'First Name in the form:{firstName}')
-            print(f'Last Name in the form:{lastName}')
-            u=User.objects.update_or_create(id=id,first_name=firstName,last_name=lastName)
-            # u.first_name=p.firstname
-            # u.last_name=p.lastname
-            # print(u.first_name)
-            # u.save()
-            
-            if request.user.role=='STD':
-                
-                return redirect(reverse('simplify_main_app:student-dashboard'))
-            else:
-                return redirect(reverse('simplify_main_app:tutor-dashboard'))
-        else:
-            print(ProfileForm.errors)
-            return render(request, 'simplify_main_app/profile.html', {'form': profileform})
-# def ProfileView(request):
-#     profileform = ProfileForm()
-#     if request.method == 'POST':
-#         profileform = ProfileForm(request.POST)
 #         if profileform.is_valid():
-#             profileform.save(False)
+#             profileform.save()  
 #             i=request.user.id
 #             u=User.objects.get(id=i)
-#             u.first_name=request.POST.get('firstname')
+#             #u.first_name=profileform.first_name
 #             u.last_name=request.POST.get('lastname')
-#             print(u.first_name)
+            
+#             print(f'id of the user in the form:{u.first_name}')
 #             u.save()
-#             print(u.first_name)
-#             if User.role=='STD':
+#             print(f'id of the user in the form:{u.first_name}')
+#             # firstName= request.POST['firstname']
+#             # lastName = request.POST['lastname']
+#             # print(f'First Name in the form:{firstName}')
+#             # print(f'Last Name in the form:{lastName}')
+#             # u.first_name=p.firstname
+#             # u.last_name=p.lastname
+#             # print(u.first_name)
+#             # u.save()
+            
+#             if request.user.role=='STD':
                 
 #                 return redirect(reverse('simplify_main_app:student-dashboard'))
 #             else:
 #                 return redirect(reverse('simplify_main_app:tutor-dashboard'))
-#     else:
-#         print(ProfileForm.errors)
+#         else:
+#             print(ProfileForm.errors)
+#             return render(request, 'simplify_main_app/profile.html', {'form': profileform})
+def ProfileView(request):
+    profileform=ProfileForm(request.POST)
+    if request.method =='POST':
+        i=request.user.id
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        u=User(first_name=firstname,last_name=lastname,id=i)
+        u.save()
+        #User.objects.update_or_create(id=i,first_name=firstname,last_name=lastname)
+        # u=User.objects.get(id=i)
+        # u.first_name=firstname
+        # u.last_name=lastname
+        # u.save()
+        print(f'First Name in the form:{u.first_name}')
+        if request.user.role=='STD':
+            return redirect(reverse('simplify_main_app:student-dashboard'))
+        else:
+            return redirect(reverse('simplify_main_app:tutor-dashboard'))
+    else:
+        return render(request, 'simplify_main_app/profile.html', {'form': profileform})
+# class ProfileView(View):
+#     def get(self,request):
+#         profileform = ProfileForm()
+#         return render(request, 'simplify_main_app/profile.html', {'form': profileform})
+#     def post(self,request):
+#         if request.method == 'POST':
+#             profileform = ProfileForm(request.POST)
+#             if profileform.is_valid():
+#                 profileform.save()
+#                 firstname=request.POST['firstname']
+#                 print(f'First Name in the form:{firstname}')
+#                 if User.role=='STD':
+                
+#                     return redirect(reverse('simplify_main_app:student-dashboard'))
+#                 else:
+#                     return redirect(reverse('simplify_main_app:tutor-dashboard'))
+#         else:
+#             print(ProfileForm.errors)
+#             return render(request, 'simplify_main_app/profile.html', {'form': profileform})
 #         return render(request, 'simplify_main_app/profile.html', {'form': profileform})
 
     
