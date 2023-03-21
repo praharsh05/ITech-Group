@@ -54,39 +54,37 @@ class RegisterView(View):
                                                                       'registered':registered})
 
 #Login view
-def user_login(request):
-    if request.method =='POST':
-        
+class LoginView(View):
+    #if request is get send the log in form
+    def get(self,request):
+        return render(request, 'simplify_main_app/login.html')
+    
+    #if request is post then check and log user in
+    def post(self,request):
         username = request.POST.get('username')
         password = request.POST.get('password')
-
+        #authenticate teh username and password recieved
         user = authenticate(username = username, password = password)
-
-        # If we have a User object, the details are correct.
-        # If None (Python's way of representing the absence of a value), no user
-        # with matching credentials was found.
         if user:
             #is the account active? it could have been disabled
             if user.is_active:
                 #if the account is valid and active we can log the user in
-                #we will send the user back to homepage
+                #we will send the user to the respective dashboard
                 login(request,user)
+                #if user is a tutor
                 if user.role=='TUT':
                     return redirect(reverse('simplify_main_app:tutor-dashboard'))
-                else:
+                else:#else if the user is student
                     return redirect('simplify_main_app:student-dashboard')
             else:
-                #an inactive account was used - no longer loging in
+                #if an inactive account was used we are not logging them in
                 return HttpResponse("Your Simplify account is disabled.")
         else:
             #bad login details were provided, so we can't log user in
             print(f"Invalid user details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
-    #the request is not an HTTP POST so return a login form
-    #this is most likly HTTP GET
-    else:
-        #no context variable to pass to the template system hence blank dict
-        return render(request, 'simplify_main_app/login.html')
+
+
 
 # Profile page
 def forum(request):
