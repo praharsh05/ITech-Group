@@ -59,40 +59,50 @@ Home
 
             </ol>
             <div class="carousel-inner">
-                {% for c in courses %}
-                {% if c.id < 2 %} <div class="carousel-item active">
-                    <a href="{% url 'simplify_main_app:course' c.slug %}"><!-- Course1 -->
-                        <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
-                    </a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>{{c.course_name}}</h5>
-                        <p>{{c.introduction}}</p>
-                    </div>
-            </div>
-            {% endif %}
-            {% endfor %}
             {% for c in courses %}
-            {% if c.id > 1 and c.id < 4 %} <div class="carousel-item">
-                <a href="{% url 'simplify_main_app:course' c.slug %}"><!-- Course2 -->
-                    <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
-                </a>
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>{{c.course_name}}</h5>
-                    <p>{{c.introduction}}</p>
-                </div>
+                {% if c.id == 1 %}
+                    <div class="carousel-item active">
+                        <a href="{% url 'simplify_main_app:course' c.slug %}"><!-- Course1 -->
+                            <img src="{% static 'images/course1.jpg' %}" class="d-block w-100" alt="...">
+                        </a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{c.course_name}}</h5>
+                            <p>{{c.introduction}}</p>
+                        </div>
+                    </div>
+                {% elif c.id == 2 %}
+                    <div class="carousel-item">
+                        <a href="{% url 'simplify_main_app:course' c.slug %}"><!-- Course2 -->
+                            <img src="{% static 'images/course2.jpg' %}" class="d-block w-100" alt="...">
+                        </a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{c.course_name}}</h5>
+                            <p>{{c.introduction}}</p>
+                        </div>
+                    </div>
+                {% elif c.id == 3 %} 
+                    <div class="carousel-item">
+                        <a href="{% url 'simplify_main_app:course' c.slug %}"><!-- Course2 -->
+                            <img src="{% static 'images/course3.jpg' %}" class="d-block w-100" alt="...">
+                        </a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{c.course_name}}</h5>
+                            <p>{{c.introduction}}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            </div>
         </div>
-        {% endif %}
-        {% endfor %}
+        <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselCaptions" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
     </div>
-    <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselCaptions" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </a>
-</div>
 </div>
 </div>
 {% endblock %}
