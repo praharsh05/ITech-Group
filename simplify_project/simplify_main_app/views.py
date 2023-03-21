@@ -91,6 +91,27 @@ class LogoutView(View):
         logout(request)
         return redirect(reverse('simplify_main_app:index'))
 
+#student dashboard view
+class StudentDashboardView(View):
+    @method_decorator(login_required)
+    def get(self,request):
+        context_dict ={}
+        try:
+            id=request.user.id
+            #to show my courses
+            studentUser= StudentProfile.objects.get(user=request.user)#getting the user
+            studentCourse = studentUser.course.all()#getting the course for that user
+            context_dict['myCourses']=studentCourse#passing it in the context dict
+            
+            course_name = Course.objects.all()
+            context_dict['courses']=course_name
+            context_dict['courseid']=StudentProfile.objects.filter(Q(user_id=id))
+        except Course.DoesNotExist:
+            context_dict['course']=None
+            #context_dict['students']=None
+            context_dict['courseid']=None
+        return render (request, 'simplify_main_app/dashboard.html', context_dict)
+
 # Profile page
 def forum(request):
     context = {}
