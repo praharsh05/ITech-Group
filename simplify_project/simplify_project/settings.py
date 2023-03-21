@@ -57,7 +57,7 @@ ROOT_URLCONF = 'simplify_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,6 +102,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#Login URL
+LOGIN_URL = 'simplify_main_app:login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -128,3 +130,6 @@ STATICFILES_DIRS = [STATIC_DIR,]
 #for media file hosting
 MEDIA_ROOT= MEDIA_DIR
 MEDIA_URL = '/media/'
+
+
+AUTH_USER_MODEL = 'simplify_main_app.User'

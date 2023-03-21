@@ -1,0 +1,28 @@
+{% extends 'simplify_main_app/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+About us
+{% endblock %}
+{% block body_block %}
+<h1 class="title-text text-center my-5">About us</h1>
+<div class="container">
+    <h3 class="title-text my-3">About Simplify</h3>
+    <div class="row">
+        <p class="main-text col-8">Simplify is the platform to learn about complexities in a simple manner. A place to learn and teach.
+            The web application provides students and tutors an open ground to exchange knowledge without any hassle. The application gives any enthusiast the ability to either become a student or a tutor and share their knowledge with like minded individuals.
+            The focal point is that the platform is open source, i.e. open for the world to share and gain knowledge.</p>
+        <div class="col-4">
+            <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100"  />
+        </div>
+    </div>
+    <h3 class="title-text my-5">About the developers</h3>
+    <ul>
+        <li class="mt-3 mb-3" style="list-style-type:none">Praharsh R Dubey​ 2738037</li>
+        <li class="mt-3 mb-3" style="list-style-type:none">Vikram Baruah​ 2795941</li>
+        <li class="mt-3 mb-3" style="list-style-type:none">Yin Long​ 2751099</li>
+        <li class="mt-3 mb-3" style="list-style-type:none">Zhaobo Guo​ 2815951</li>
+        <li class="mt-3 mb-3" style="list-style-type:none">Yifan Guo​ 2721370</li>
+    </ul>
+    <h3 class="title-text my-5">Contact us</h3>
+</div>
+{% endblock %}

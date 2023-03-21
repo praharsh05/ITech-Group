@@ -19,9 +19,11 @@ from simplify_main_app import views
 from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
+from simplify_main_app.views import IndexView
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', IndexView.as_view(), name='index'),
     path('simplify/', include('simplify_main_app.urls')),
+    path('dashboard/',include('simplify_main_app.urls')),
     path('admin/', admin.site.urls),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

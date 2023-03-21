@@ -1,0 +1,23 @@
+{% extends 'simplify_main_app/base.html' %}
+{% load static %}
+
+{% block title_block %}
+Register
+{% endblock %}
+
+{%block body_block %}
+<h1 class="title-text text-center mt-5">Register for Simplify</h1>
+{% if registered %}
+Thank you for Registering!
+<a href="{% url 'simplify_main_app:index' %}">Return to Home Page</a><br />
+{% else %}
+<div class="container d-flex justify-content-center mt-5">
+    <form class="mb-5 main-text" id="user_form" method="post" action="{% url 'simplify_main_app:register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{user_form.as_p}}
+        {{profile_form.as_p}}
+        <input class="btn btn-dark mt-3" type="submit" name="submit" value="Register" />
+    </form>
+</div>
+{% endif %}
+{% endblock %}
