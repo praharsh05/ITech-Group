@@ -60,20 +60,20 @@ Home
             </ol>
             <div class="carousel-inner">
                 {% for c in courses %}
-                {% if c.id < 2%} <div class="carousel-item active">
-                    <a href="#"><!-- Course1 -->
+                {% if c.id < 2 %} <div class="carousel-item active">
+                    <a href="{% url 'simplify_main_app:course' c.slug %}"><!-- Course1 -->
                         <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
                     </a>
                     <div class="carousel-caption d-none d-md-block">
                         <h5>{{c.course_name}}</h5>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <p>{{c.introduction}}</p>
                     </div>
             </div>
             {% endif %}
             {% endfor %}
             {% for c in courses %}
-            {% if c.id > 1 and c.id < 4%} <div class="carousel-item">
-                <a href="#"><!-- Course2 -->
+            {% if c.id > 1 and c.id < 4 %} <div class="carousel-item">
+                <a href="{% url 'simplify_main_app:course' c.slug %}"><!-- Course2 -->
                     <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
