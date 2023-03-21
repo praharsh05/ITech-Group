@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from simplify_main_app.forms import UserForm, CourseForm,MaterialForm, ProfileForm
 from django.contrib.auth import authenticate, login,logout
@@ -95,18 +95,15 @@ def dashboard(request):
 @login_required
 def student_dashboard(request):
     context_dict ={}
-    # if request.method =='POST':
-    #     username= request.POST.get('username')
-    #     id = request.POST.get('course_id')
-    #     for u in User.objects.all():
-    #         if (u.username == username):
-    #             t=StudentProfile.objects.get_or_create(course_id=id,user=u)
     try:
         id=request.user.id
+        #to show my courses
+        studentUser= StudentProfile.objects.get(user=request.user)#getting the user
+        studentCourse = studentUser.course.all()#getting the course for that user
+        context_dict['myCourses']=studentCourse#passing it in the context dict
+        
         course_name = Course.objects.all()
-        #studentprofile=StudentProfile.objects.get(user_id=id)
         context_dict['courses']=course_name
-        #context_dict['students']=studentprofile
         context_dict['courseid']=StudentProfile.objects.filter(Q(user_id=id))
     except Course.DoesNotExist:
         context_dict['course']=None
@@ -257,3 +254,16 @@ class AddMaterialView(View):
         else:
             print(material_form.errors)
         return
+
+
+class addCourseStudentView(View):
+    def get(self,request,course_name_slug,course_id):
+        user = request.user
+        course = get_object_or_404(Course, id=course_id)
+        Student_course = StudentProfile.objects.get_or_create(user=user)[0]
+        # Check whether the Course is alread in StudentProfile or Not
+        course_already_in_available = StudentProfile.objects.filter(course=course_id, user=user)
+        if not  course_already_in_available:
+            Student_course.course.add(course)
+            Student_course.save()
+        return redirect(reverse('simplify_main_app:student-dashboard'))
