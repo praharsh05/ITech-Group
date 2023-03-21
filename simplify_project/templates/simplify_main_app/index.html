@@ -18,12 +18,14 @@ Home
             <img class="d-block w-100" src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
         </div>
         <p class="main-text col-5 px-3">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
-            perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!
+            Simplify is the platform to learn about complexities in a simple manner. A place to learn and teach. The web
+            application provides students and tutors an open ground to exchange knowledge without any hassle. The
+            application gives any enthusiast the ability to either become a student or a tutor and share their knowledge
+            with like minded individuals. The focal point is that the platform is open source, i.e. open for the world
+            to share and gain knowledge
         </p>
-    
-    <!-- Login form -->
+        {% if not user.is_authenticated %}
+        <!-- Login form -->
         <div class="col-3 px-3">
             <h3 class="title-text">Login/Sign up</h3>
             <form class="main-text" id="login_form" method="post" action="{% url 'simplify_main_app:login' %}">
@@ -34,11 +36,15 @@ Home
                     <label for="inputPassword" class="form-label ">Password</label>
                     <input class="form-control" id="inputPassword" type="password" name="password" value="" size="50" />
                 </div>
-                <button class="btn btn-light me-3" type="submit" value="submit" >Login</button>
-                <button class="btn btn-light" id="signup" onclick="window.location= '{% url 'simplify_main_app:register' %}'">Signup</button>
+
+                <button class="btn btn-light me-3" type="submit" value="submit">Login</button>
+                <button class="btn btn-light" id="signup"
+                    onclick="window.location= '{% url 'simplify_main_app:register' %}'">Signup</button>
+
             </form>
         </div>
     </div>
+    {% endif %}
 </div>
 <div class="mt-5 mb-5">
     <!-- second div giving preview of available courses -->
@@ -50,45 +56,53 @@ Home
                 <li data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active"></li>
                 <li data-bs-target="#carouselCaptions" data-bs-slide-to="1"></li>
                 <li data-bs-target="#carouselCaptions" data-bs-slide-to="2"></li>
+
             </ol>
             <div class="carousel-inner">
-            <div class="carousel-item active">
-                <a href="#"><!-- Course1 -->
-                    <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
-                </a>
-                <div class="carousel-caption d-none d-md-block">
-                <h5>First Course Title</h5>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <a href="#"><!-- Course2 -->
-                    <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
-                </a>
-                <div class="carousel-caption d-none d-md-block">
-                <h5>Second Course Title</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <a href="#"><!-- Course3 -->
-                    <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
-                </a>
-                <div class="carousel-caption d-none d-md-block">
-                <h5>Third Course Title</h5>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </div>
-            </div>
+            {% for c in courses %}
+                {% if c.id == 1 %}
+                    <div class="carousel-item active">
+                        <a href="{% url 'simplify_main_app:course' c.slug %}"><!-- Course1 -->
+                            <img src="{% static 'images/course1.jpg' %}" class="d-block w-100" alt="..." style="width: 100px; height:500px">
+                        </a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{c.course_name}}</h5>
+                            <p>{{c.introduction}}</p>
+                        </div>
+                    </div>
+                {% elif c.id == 2 %}
+                    <div class="carousel-item">
+                        <a href="{% url 'simplify_main_app:course' c.slug %}"><!-- Course2 -->
+                            <img src="{% static 'images/course2.jpg' %}" class="d-block w-100" alt="..." style="width: 100px; height:500px">
+                        </a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{c.course_name}}</h5>
+                            <p>{{c.introduction}}</p>
+                        </div>
+                    </div>
+                {% elif c.id == 3 %} 
+                    <div class="carousel-item">
+                        <a href="{% url 'simplify_main_app:course' c.slug %}"><!-- Course3 -->
+                            <img src="{% static 'images/course3.jpg' %}" class="d-block w-100" alt="..." style="width: 100px; height:500px">
+                        </a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{c.course_name}}</h5>
+                            <p>{{c.introduction}}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
             </div>
             <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </a>
             <a class="carousel-control-next" href="#carouselCaptions" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </a>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}

@@ -18,11 +18,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- cutom CSS -->
     <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
+        <link rel="stylesheet" href="{% static 'CSS/my.css' %}">
     <!-- Title tag -->
     <title>
         Simplify
         {% block title_block %}
-        description
         {% endblock %}
     </title>
 </head>
@@ -42,41 +42,39 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- list of links in the navbar -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 main-text">
+                        {% if not user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link me-4" aria-current="page"
                                 href="{% url 'simplify_main_app:index' %}">Home</a>
                         </li>
+                        {%endif%}
                         <li class="nav-item me-4">
                             <a class="nav-link" aria-current="page" href="{% url 'simplify_main_app:about-us' %}">About Us</a>
                         </li>
                         <li class="nav-item me-4">
-                            <a class="nav-link" aria-current="page" aria-current="page"
-                                href="{% url 'simplify_main_app:course' %}">Courses</a>
-                        </li>
-                        <li class="nav-item me-4">
-                            <a class="nav-link" aria-current="page" aria-current="page"
-                                href="{% url 'simplify_main_app:forum' %}">Forum</a>
-                        </li>
-                        {% if user.is_authenticated %}
 
-                        <li class="nav-item">
-                            <a class="nav-link me-4" aria-current="page"
-                                href="{% url 'simplify_main_app:dashboard' %}">Dashboard</a>
+                            <a class="nav-link" aria-current="page"
+                                href="#">Courses</a>
+
                         </li>
                         <li class="nav-item me-4">
                             <a class="nav-link" aria-current="page"
-
-                        {% if user.user_profile.type == 'STD' %}
-                        <li class="nav-item"><a class="nav-link active" aria-current="page"
+                                href="{% url 'simplify_main_app:forum' %}">Forum</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        {% if user.role == 'STD' %}
+                        <li class="nav-item me-4">
+                            <a class="nav-link" aria-current="page"
                                 href="{% url 'simplify_main_app:student-dashboard' %}">Student Dashboard</a>
                         </li>
                         {% else %}
-                        <li class="nav-item"><a class="nav-link active" aria-current="page"
+                        <li class="nav-item me-4">
+                            <a class="nav-link" aria-current="page"
                                 href="{% url 'simplify_main_app:tutor-dashboard' %}">Tutor Dashboard</a>
                         </li>
                         {% endif %}
-                        <li class="nav-item"><a class="nav-link active" aria-current="page"
-
+                        <li class="nav-item me-4">
+                            <a class="nav-link" aria-current="page"
                                 href="{% url 'simplify_main_app:logout' %}">Logout</a></li>
                         {% else %}
                         <li class="nav-item me-4">
@@ -108,9 +106,9 @@
                 </div>
                 <!-- footer description -->
                 <div class="footer-description main-text">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia natus suscipit ad provident
-                        praesentium
-                        earum excepturi nihil eligendi voluptatibus dolore.</p>
+                    <p>Simplify is the platform to learn about complexities in a simple manner. A place to learn and teach.
+                        The focal point is that the platform is open source, i.e. open for the world to share and gain knowledge.
+                    </p>
                 </div>
                 <!-- list of links -->
 
@@ -153,6 +151,7 @@
             }).scroll();
         });
     </script>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
 </body>
 
 </html>

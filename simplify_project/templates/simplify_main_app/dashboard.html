@@ -5,27 +5,39 @@ Dashboard
 {% endblock %}
 {% block body_block %}
 <h1 class="title-text text-center mt-5">Dashboard</h1>
-<div class="row mb-5 mt-5">
-    <div class="col-4 px-3">
-        <img class="d-block w-100" src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
+<section class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-4 mb-sm-5">
+                <div class="card card-style1 border-0">
+                    <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                <img src="{% static 'images/avatar.png' %}" alt="...">
+                            </div>
+                            
+                            <div class="col-lg-6 px-xl-10">
+                                {% comment %} <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                    <h3 class="h2 text-white mb-0">{{user.first_name}} {{user.last_name}}</h3>
+                                    <span class="text-primary">Student</span>
+                                </div> {% endcomment %}
+                                <ul class="list-unstyled mb-1-9">
+                                  <h3>Welcome {{user.first_name}} {{user.last_name}}</h3>
+                                </ul>
+                                
+                            </div>
+                        </div>
+                        <div class="col-2 ms-3">
+                            <!-- add modal to edit profile -->
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-5 px-3">
-        <span class="title-text">Description</span>
-        </br>
-        <span>[username]</span>
-        <span>[usertype]</span>
-        <!-- eg: lisa, tutor -->
-        <p class="main-text mt-3">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
-            perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!
-        </p>
-    </div>
-    <div class="col-2 ms-3">
-        <!-- add modal to edit profile -->
-        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
-    </div>
-</div>
+</section>
+
 <!-- modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -59,46 +71,41 @@ Dashboard
         </div>
     </div>
 </div>
-
-<h2 class="title-text mt-5">Courses</h2>
+    
+<h2 class="title-text mt-5">My Courses</h2>
 <div class="row">
+    {% for c in myCourses %}
     <!-- courses -->
     <!-- these are example courses, just loop one to generate -->
     <div class="card col-3 mx-4 my-4">
         <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
+          <h5 class="card-title">{{c.course_name}}</h5>
+          <p class="card-text">{{c.introduction}}</p>
+          <a href="{% url 'simplify_main_app:course' c.slug %}" class="btn btn-primary">Enter</a>
         </div>
     </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
+    {% endfor %}
 </div>
+
+<h2 class="title-text mt-5">Available Courses</h2>
+<form class="mb-5 main-text" id="StudentCourseForm" method="post">
+
+<div class="row">
+    <!-- courses -->
+    <!-- these are example courses, just loop one to generate -->
+    {% for c in courses %}
+    <!-- courses -->
+    <!-- these are example courses, just loop one to generate -->
+    <div class="card col-3 mx-4 my-4">
+        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{c.course_name}}</h5>
+          <p class="card-text">{{c.introduction}}</p>
+          <a href="{% url 'simplify_main_app:course' c.slug %}" class="btn btn-primary">Enter</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</form> 
 {% endblock %}

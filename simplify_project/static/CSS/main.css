@@ -1,15 +1,15 @@
-.body{
+/* .body{
     position: absolute;
     left: 0px;
     right: 0px;
     z-index: -1;
     width:100%;
     height:100%;
-    background-image: url('../images/bg-1.png');
-}
+     background-image: url('../images/bg-1.png'); 
+}  */ 
 .navbar{/*setting the background color*/
-    /* background-color: #955fe1; */
-    /* filter: opacity(50%); */
+    /* background-color: #955fe1;  */
+    /* filter: opacity(50%);  */
 }
 /* decreasing the navbar logo */
 .navbar-brand-logo{
