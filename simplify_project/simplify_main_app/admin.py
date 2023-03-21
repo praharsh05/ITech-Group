@@ -1,7 +1,22 @@
 from django.contrib import admin
-from simplify_main_app.models import User
+from simplify_main_app.models import User, Course,Material,StudentProfile,TutorProfile
 
 # Register your models here.
 
-#registering the view in the admin for user
+#registering the model in the admin for user
 admin.site.register(User)
+admin.site.register(StudentProfile)
+admin.site.register(TutorProfile)
+
+# for course admin
+class CourseAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('course_name',)}
+
+#for materials in a course
+class MaterialAdmin(admin.ModelAdmin):
+    list_display = ('material', 'url')
+
+
+# registering the model
+admin.site.register(Course,CourseAdmin)
+admin.site.register(Material,MaterialAdmin)

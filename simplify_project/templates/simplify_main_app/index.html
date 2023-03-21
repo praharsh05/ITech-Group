@@ -22,7 +22,7 @@ Home
             autem voluptas vel molestiae reiciendis placeat quis. Debitis voluptates natus ea recusandae sint animi
             perferendis facilis totam minus rerum ipsum, repellat obcaecati asperiores, iure aperiam cupiditate!
         </p>
-    
+    {% if not user.is_authenticated %}
     <!-- Login form -->
         <div class="col-3 px-3">
             <h3 class="title-text">Login/Sign up</h3>
@@ -34,11 +34,14 @@ Home
                     <label for="inputPassword" class="form-label ">Password</label>
                     <input class="form-control" id="inputPassword" type="password" name="password" value="" size="50" />
                 </div>
+                
                 <button class="btn btn-light me-3" type="submit" value="submit" >Login</button>
                 <button class="btn btn-light" id="signup" onclick="window.location= '{% url 'simplify_main_app:register' %}'">Signup</button>
+            
             </form>
         </div>
     </div>
+    {% endif %}
 </div>
 <div class="mt-5 mb-5">
     <!-- second div giving preview of available courses -->
@@ -50,35 +53,35 @@ Home
                 <li data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active"></li>
                 <li data-bs-target="#carouselCaptions" data-bs-slide-to="1"></li>
                 <li data-bs-target="#carouselCaptions" data-bs-slide-to="2"></li>
+            
             </ol>
             <div class="carousel-inner">
+            {% for c in courses %}
+            {% if c.id < 2%}
             <div class="carousel-item active">
                 <a href="#"><!-- Course1 -->
                     <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
-                <h5>First Course Title</h5>
+                <h5>{{c.course_name}}</h5>
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </div>
             </div>
+            {% endif %}
+            {% endfor %}
+            {% for c in courses %}
+            {% if c.id > 1 and c.id < 4%}
             <div class="carousel-item">
                 <a href="#"><!-- Course2 -->
                     <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
-                <h5>Second Course Title</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h5>{{c.course_name}}</h5>
+                <p>{{c.introduction}}</p>
                 </div>
             </div>
-            <div class="carousel-item">
-                <a href="#"><!-- Course3 -->
-                    <img src="{% static 'images/homepage_img.jpg' %}" class="d-block w-100" alt="...">
-                </a>
-                <div class="carousel-caption d-none d-md-block">
-                <h5>Third Course Title</h5>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </div>
-            </div>
+            {% endif %}
+            {% endfor %}
             </div>
             <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

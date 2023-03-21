@@ -5,8 +5,6 @@ Dashboard
 {% endblock %}
 {% block body_block %}
 <h1 class="title-text text-center mt-5">Dashboard</h1>
-
-
 <section class="bg-light">
     <div class="container">
         <div class="row">
@@ -15,27 +13,18 @@ Dashboard
                     <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                         <div class="row align-items-center">
                             <div class="col-lg-6 mb-4 mb-lg-0">
-                                <img class="d-block w-100" src="{% static 'images/homepage_img.jpg' %}" alt="picture of two students">
+                                <img src="{% static 'images/avatar.png' %}" alt="...">
                             </div>
                             
                             <div class="col-lg-6 px-xl-10">
-                                <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
-                                    <h3 class="h2 text-white mb-0"><span>[username]</span></h3>
-                                    <span class="text-primary">[usertype]</span>
-                                </div>
+                                {% comment %} <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                    <h3 class="h2 text-white mb-0">{{user.first_name}} {{user.last_name}}</h3>
+                                    <span class="text-primary">Student</span>
+                                </div> {% endcomment %}
                                 <ul class="list-unstyled mb-1-9">
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">School:</span> School of xyz</li>
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Year:</span> First</li>
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> xyz@mail.com</li>
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone:</span> 01234-56789</li>
-                                    <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Address:</span> </li>
+                                  <h3>Welcome {{user.first_name}} {{user.last_name}}</h3>
                                 </ul>
-                                <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
-                                    <li><a href="#!"><i class="ti-twitter-alt"></i></a></li>
-                                    <li><a href="#!"><i class="ti-facebook"></i></a></li>
-                                    <li><a href="#!"><i class="ti-pinterest"></i></a></li>
-                                    <li><a href="#!"><i class="ti-instagram"></i></a></li>
-                                </ul>
+                                
                             </div>
                         </div>
                         <div class="col-2 ms-3">
@@ -48,6 +37,7 @@ Dashboard
         </div>
     </div>
 </section>
+
 <!-- modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -81,88 +71,41 @@ Dashboard
         </div>
     </div>
 </div>
-
+    
 <h2 class="title-text mt-5">My Courses</h2>
 <div class="row">
+    {% for c in myCourses %}
     <!-- courses -->
     <!-- these are example courses, just loop one to generate -->
     <div class="card col-3 mx-4 my-4">
         <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
+          <h5 class="card-title">{{c.course_name}}</h5>
+          <p class="card-text">{{c.introduction}}</p>
+          <a href="{% url 'simplify_main_app:course' c.slug %}" class="btn btn-primary">Enter</a>
         </div>
     </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
+    {% endfor %}
 </div>
 
 <h2 class="title-text mt-5">Available Courses</h2>
+<form class="mb-5 main-text" id="StudentCourseForm" method="post">
+
 <div class="row">
+    <!-- courses -->
+    <!-- these are example courses, just loop one to generate -->
+    {% for c in courses %}
     <!-- courses -->
     <!-- these are example courses, just loop one to generate -->
     <div class="card col-3 mx-4 my-4">
         <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
+          <h5 class="card-title">{{c.course_name}}</h5>
+          <p class="card-text">{{c.introduction}}</p>
+          <a href="{% url 'simplify_main_app:course' c.slug %}" class="btn btn-primary">Enter</a>
         </div>
     </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
+    {% endfor %}
 </div>
+</form> 
 {% endblock %}
