@@ -78,6 +78,10 @@ def aboutUs(request):
     context = {}
     return render(request, 'simplify_main_app/about_us.html', context)
 
+def addCourse(request):
+    context = {}
+    return render(request, 'simplify_main_app/addCourse.html', context)
+
 #dashboard view
 
 # @login_required

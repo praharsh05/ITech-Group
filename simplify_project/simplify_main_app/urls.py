@@ -12,4 +12,5 @@ urlpatterns= [
     path('forum/', views.forum, name='forum'),
     path('about-us/', views.aboutUs, name='about-us'),
     path('course/', views.course, name='course'),
+    path('addCourse/', views.addCourse, name='add-course'),
 ]
