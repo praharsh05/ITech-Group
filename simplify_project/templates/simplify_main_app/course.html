@@ -14,9 +14,9 @@
     {% if course %}
         <h1> {{course.course_name}}</h1><br />
         <p>{{course.introduction}}</p>
-        <!-- <p>{{course.id}} : course_id</p> -->
+        {% if user.role == 'STD' %}
         <button class="btn btn-dark mt-3" type="submit" name="submit" onclick="window.location='{% url 'simplify_main_app:add_course_student'  course.slug course.id %}'">Add to Your Course</button><br />
-        <!-- <a href="#">Add to Your Course</a><br /> -->
+        {% endif %}
         {% if materials %}
             <ul>
                 {% for material in materials %}
