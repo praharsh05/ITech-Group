@@ -28,9 +28,9 @@ with open('secret.key') as f:
 SECRET_KEY = key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['praharsh05.pythonanywhere.com','127.0.0.1']
+ALLOWED_HOSTS = ['praharsh05.pythonanywhere.com']
 
 
 # Application definition
