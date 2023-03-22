@@ -6,7 +6,8 @@ Add material
 {% endblock %}
 
 {% block body_block %}
-<h1> Add material to {{ course.name }}</h1>
+{% if course %}
+<h1> Add material to {{ course.course_name }}</h1>
 <div>
     <form id="msterial_form" method="post" action="{% url 'simplify_main_app:add_material' course.slug %}">
         {% csrf_token %}
@@ -19,4 +20,7 @@ Add material
         <button class="btn btn-dark mt-3" type="submit" name="submit">Add Material</button>
     </form>
 </div>
+{% else %}
+<h1>Course does not exist</h1>
+{% endif %}
 {% endblock %}

@@ -20,7 +20,7 @@
                 <li class="mt-3 mb-3" style="list-style-type:none"><span style="font-size:22px">Course name:
                     </span><span>{{course.course_name}}</span></li>
                 <li class="mt-3 mb-3" style="list-style-type:none"><span style="font-size:22px">Tutor:
-                    </span><span>Lorem ipsum dolor</span></li>
+                    </span><span>{{tutor.first_name}} {{tutor.last_name}}</span></li>
                 <li class="mt-3 mb-3" style="list-style-type:none"><span style="font-size:22px">Description: </span>
                     <span>
                         {{course.introduction}}
@@ -28,9 +28,11 @@
                 </li>
                 <li class="mt-3 mb-3" style="list-style-type:none">
                     {% if user.role == 'STD' %}
+                    {% if not course in myCourses %}
                     <button class="btn btn-dark mt-3" type="submit" name="submit"
                         onclick="window.location='{% url 'simplify_main_app:add_course_student'  course.slug course.id %}'">Add
                         to Your Course</button><br />
+                    {% endif %}
                     {% endif %}
                 </li>
             </ul>
@@ -46,7 +48,7 @@
         <!-- sigle unit, generate by loop -->
         <div class="ms-5 my-3">
             <p>
-                <a class="btn btn-warning" data-bs-toggle="collapse" href="#unit1" role="button" aria-expanded="false"
+                <a class="btn btn-dark mt-3" data-bs-toggle="collapse" href="#unit1" role="button" aria-expanded="false"
                     aria-controls="unit1">
                     Material Links
                 </a>
@@ -59,28 +61,8 @@
                             {{material.url}}
                         </a>
                         {% endfor %}
-                        <!-- <a href="#" class="list-group-item list-group-item-action">M2: Dapibus ac facilisis in</a>
-                        <a href="#" class="list-group-item list-group-item-action">M3: Morbi leo risus</a>
-                        <a href="#" class="list-group-item list-group-item-action">M4: Porta ac consectetur ac</a>
-                        <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1"
-                            aria-disabled="true">M5: Vestibulum at eros</a> -->
+                        
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- example unit -->
-        <div class="ms-5 my-3">
-            <p>
-                <a class="btn btn-warning" data-bs-toggle="collapse" href="#unit2" role="button" aria-expanded="false"
-                    aria-controls="unit2">
-                    Unit 2: Anim pariatur
-                </a>
-            </p>
-            <div class="collapse" id="unit2">
-                <div class="card card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                 </div>
             </div>
         </div>
@@ -89,10 +71,10 @@
         {% endif %}
         <div>
             {% if user.role == 'TUT' %}
-            <a href="{% url 'simplify_main_app:add_material' course.slug %}">Add Material</a><br />
+            <a class="btn btn-dark mt-3" href="{% url 'simplify_main_app:add_material' course.slug %}">Add Material</a><br />
             {% endif %}
         </div>
-    </div>
+
     {% else %}
         The Specified course does not exists.
     {% endif %}

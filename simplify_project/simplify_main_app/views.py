@@ -152,6 +152,12 @@ class TutorDashboardView(View):
 class showCourseView(View):
     def get(self,request,course_name_slug):
         context_dict =self.helper(course_name_slug)
+        if request.user.role == 'STD':
+            studentUser= StudentProfile.objects.get(user=request.user)#getting the user
+            studentCourse = studentUser.course.all()#getting the course for that user
+            context_dict['myCourses']=studentCourse#passing it in the context dict
+        else:
+            context_dict['myCourses']=None
         return render(request,'simplify_main_app/course.html', context_dict)
     
     def helper(self,course_name_slug):
@@ -159,11 +165,14 @@ class showCourseView(View):
         try:
             course = Course.objects.get(slug=course_name_slug)
             materials = Material.objects.filter(material=course)
+            tutor = User.objects.get(id=course.tutor_id)
+            context_dict['tutor']=tutor
             context_dict['materials']=materials
             context_dict['course']=course
         except Course.DoesNotExist:
             context_dict['materials']=None
             context_dict['course']=None
+            context_dict['tutor']=None
         return context_dict
 
 

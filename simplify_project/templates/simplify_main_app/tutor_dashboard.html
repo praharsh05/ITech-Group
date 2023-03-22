@@ -28,8 +28,8 @@ Dashboard
                         </div>
                         <div class="col-2 ms-3">
                             <!-- add modal to edit profile -->
-                            <button class="btn btn-outline-primary" onclick="window.location= '{% url 'simplify_main_app:profile' %}'" style="margin-bottom: 10px">Edit Profile</button>
-                            <button class="btn btn-outline-primary" onclick="window.location= '{% url 'simplify_main_app:add_course' %}'" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" style="margin-bottom: 10px">Add Course</button>
+                            <button class="btn btn-dark mt-3" onclick="window.location= '{% url 'simplify_main_app:profile' %}'" style="margin-bottom: 10px">Edit Profile</button>
+                            <button class="btn btn-dark mt-3" onclick="window.location= '{% url 'simplify_main_app:add_course' %}'" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" style="margin-bottom: 10px">Add Course</button>
                             
                     </div>
                 </div>
@@ -37,66 +37,6 @@ Dashboard
         </div>
     </div>
 </section>
-
-<!-- modal -->
-
-{% comment %} <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Edit profile</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="container d-flex justify-content-center mt-5">
-            <form class="mb-5 main-text" id="user_form" method="post" action="{% url 'simplify_main_app:register' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="emailInput" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control mb-3" id="emailInput" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="emailInput" class="form-label">Email address</label>
-                    <input type="email" name="email" class="form-control mb-3" id="emailInput" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="nameInput" class="form-label">First name</label>
-                    <input type="text" name="first_name" class="form-control mb-3" id="nameInput">
-                </div>
-                <div class="mb-3">
-                    <label for="nameInput" class="form-label">Last name</label>
-                    <input type="text" name="last_name" class="form-control mb-3" id="nameInput">
-                </div>
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" value="Register">Save Changes</button>
-                <!-- <input class="btn btn-dark mt-3" type="submit" name="submit" value="Submit" /> -->
-            </div>
-        </form>
-            </div>
-        </div>
-    </div>
-</div>
-</form> {% endcomment %}
-
-
-<!-- <div  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <h1 class="title-text text-center mt-5">Edit Profile</h1>
-{% if registered %}
-
-<div class="container d-flex justify-content-center mt-5">
-    <form class="mb-5 main-text" id="user_form" method="post" action="{% url 'simplify_main_app:tutor_dashboard' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{user_form.as_p}}
-        {{profile_form.as_p}}
-        <input class="btn btn-dark mt-3" type="submit" name="submit" value="Register" />
-    </form>
-</div>
-{% endif %}
-</div> -->
 
 <h2 class="title-text mt-5">My Courses</h2>
 <div class="row">
@@ -109,39 +49,10 @@ Dashboard
                 <div class="card-body">
                 <h5 class="card-title">{{c.course_name}}</h5>
                 <p class="card-text">{{c.introduction}}</p>
-                <a href="{% url 'simplify_main_app:course' c.slug %}" class="btn btn-primary">Enter</a>
+                <a href="{% url 'simplify_main_app:course' c.slug %}" class="btn btn-dark mt-3">Enter</a>
                 </div>
             </div>
         {% endif %}
     {% endfor %}
-</div>
-    {% comment %} <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-</div> {% endcomment %}
  
 {% endblock %}

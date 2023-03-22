@@ -16,8 +16,8 @@ Forum
 
         <div class="card mx-5">
             <div class="card-body">
-              <h5 class="card-title title-text">{{ forloop.counter|add:strat }}-thread-{{ foo.3 }}</h5>
-              <p class="mb-3 main-text">{{ foo.1 }}</p>
+              <h5 class="card-title title-text"> {{ foo.1 }}</h5>
+              <p class="mb-3 main-text">Title: {{ foo.1 }}</p>
               <p class="card-text main-text mb-3">{{ foo.2 }}</p>
             </div>
             <ul class="list-group list-group-flush main-text">
@@ -112,17 +112,5 @@ Forum
           </form>
     </div>
 </div>
-<script>
-    $(function(){
-        $(".reply-link").click(function(e){
-            if ( $("#reply-input").length > 0 ) { 
-                $("#reply-input").remove();
-            }else{
-                let replyArea = "<li id='reply-input' class='list-group-item'><div class='input-group'><input type='text' id='reply' class='form-control'></input><button type='submit' class='btn btn-primary'>send</button></div></li>";
-                $(e.target).parent().append(replyArea);
-                $("#reply").val("@" + $(e.target).parent().children()[0].innerHTML);
-            }              
-        });
-    });
-</script>
+
 {% endblock %}

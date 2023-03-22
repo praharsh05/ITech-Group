@@ -12,7 +12,13 @@ Dashboard
     <div class="col-5 px-3">
         <span class="title-text">Description</span>
         </br>
-        <span>My Name:{{ user_info.4 }}</span>
+        <span>First Name: {{ user.first_name }}</span><br />
+        <span>Last Name: {{ user.last_name }}</span><br />
+        {% if user.role == 'TUT' %}
+            <span>I'm a : Tutor</span><br />
+        {% else %}
+            <span>I'm a : Student</span><br />
+        {% endif %}
         <span>{{ user_info.5 }}</span>
         <!-- eg: lisa, tutor -->
         <p class="main-text mt-3">
@@ -76,37 +82,9 @@ Dashboard
         <div class="card-body">
           <h5 class="card-title">{{ c.1 }}</h5>
           <p class="card-text">{{ c.2 }}</p>
-          <a href="/forum/forum?id={{ c.0 }}" class="btn btn-primary">Enter</a>
+          <a href="/forum/forum?id={{ c.0 }}" class="btn btn-dark mt-3">Enter</a>
         </div>
     </div>
     {% endfor %}
-
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
-    <div class="card col-3 mx-4 my-4">
-        <img src="{% static 'images/homepage_img.jpg' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Course title</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quaerat cupiditate in, voluptate dolorum
-            autem voluptas vel molestiae reiciendis placeat quis.</p>
-          <a href="#" class="btn btn-primary">Enter</a>
-        </div>
-    </div>
 </div>
 {% endblock %}
