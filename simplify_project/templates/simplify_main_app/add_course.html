@@ -14,7 +14,7 @@ Add course
         <div class="col-7 px-5">
             {% if user.is_authenticated %}
             {% if user.role == 'TUT' %}
-            <form id="course_form" method="post" action="{% url 'simplify_main_app:add_course' %}">
+            <form id="course_form" method="post" action="{% url 'simplify_main_app:add_course' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="title" class="form-label">Course title</label>

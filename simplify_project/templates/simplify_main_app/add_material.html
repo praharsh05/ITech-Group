@@ -9,7 +9,7 @@ Add material
 {% if course %}
 <h1> Add material to {{ course.course_name }}</h1>
 <div>
-    <form id="msterial_form" method="post" action="{% url 'simplify_main_app:add_material' course.slug %}">
+    <form id="msterial_form" method="post" action="{% url 'simplify_main_app:add_material' course.slug %}" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
             {{ field.errors }}

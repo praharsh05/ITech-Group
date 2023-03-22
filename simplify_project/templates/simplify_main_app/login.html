@@ -6,7 +6,7 @@ Login
 {% block body_block %}
 <h1 class="title-text text-center mt-5">Login to Simplify</h1>
 <div class="container d-flex justify-content-center mt-5 main-text">
-    <form id="login_form" method="post" action="{% url 'simplify_main_app:login' %}">
+    <form id="login_form" method="post" action="{% url 'simplify_main_app:login' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-4">
             <label for="inputUsername" class="form-label">Username</label>
