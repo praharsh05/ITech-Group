@@ -13,13 +13,18 @@ Simplify is a Django based web application to facilitate knowledge exchange betw
 
 The home page has two sections: introduction and course preview. The introduction section has two nested sections:
 
-### Intoduction Sub-Section
+### Introduction Section
+#### Intoduction Sub-Section
 
 Introduction image and intoduction paragraph gives the overview of Simplify.
 
-### Quick Login and Register Sub-Section
+#### Quick Login and Register Sub-Section
 
 This sub-section provides users with a quick login.
+
+### Course Carousel
+
+This section shows the first three courses in a carousel with their description.
 
 ![Simplify_home](https://github.com/praharsh05/ITech-Group/assets/75966397/2747cfa1-82fc-459c-a74e-46dcbd55a9fd)
 
